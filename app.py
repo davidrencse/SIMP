@@ -17,7 +17,9 @@ from steg import StegError, embed, extract, read_png
 
 
 ROOT = Path(__file__).resolve().parent
-SAMPLE_PLATE = ROOT / "assets/plates/carrier-photo.png"
+SOURCE_PLATE = ROOT / "assets/plates/carrier-photo.png"
+SAMPLE_PLATE = ROOT / "assets/plates/carrier-photo-preview.png"
+COMPACT_PLATE = ROOT / "assets/plates/carrier-photo-compact.png"
 
 PAPER = "#E7E6DD"
 PAPER_LIGHT = "#F3F1E9"
@@ -61,7 +63,7 @@ class LatticeApp:
 
         root.title("Lattice — local PNG steganography")
         root.geometry("1536x985+0+0")
-        root.minsize(1080, 720)
+        root.minsize(1200, 800)
         root.configure(bg=PAPER)
         root.option_add("*Font", ("Segoe UI", 10))
 
@@ -74,7 +76,7 @@ class LatticeApp:
             self.carrier_path = SAMPLE_PLATE
             self.payload_text.insert("1.0", "Meet at the north trailhead at 7. Bring the maps.")
             self.output_path = ROOT / "lattice_encoded.png"
-            self.output_var.set(str(self.output_path))
+            self.output_var.set(self.output_path.name)
             self._inspect_carrier(SAMPLE_PLATE)
             self.caption_var.set("Carrier · sample landscape.png")
             self._set_status("Ready to create the encoded proof.", "ready")
@@ -156,7 +158,7 @@ class LatticeApp:
             text="",
             justify="left",
             anchor="nw",
-            wraplength=105,
+            wraplength=76,
             bg=PAPER,
             fg=MUTED,
             font=("Segoe UI", 9),
@@ -167,7 +169,7 @@ class LatticeApp:
             text="Choose a PNG\nto inspect.",
             justify="left",
             anchor="sw",
-            wraplength=105,
+            wraplength=76,
             bg=PAPER,
             fg=MUTED,
             font=("Segoe UI Italic", 9),
@@ -278,9 +280,9 @@ class LatticeApp:
         )
         self.output_detail = tk.Label(
             output,
-            text="A new PNG will be created; the source is unchanged.",
+            text="The source image stays unchanged.",
             justify="left",
-            wraplength=290,
+            wraplength=220,
             bg=PAPER_LIGHT,
             fg=MUTED,
             font=("Segoe UI", 8),
@@ -508,7 +510,8 @@ class LatticeApp:
         self._queue_preview()
         if self.mode == "hide" and self.output_path is None:
             self.output_path = candidate.with_name(f"{candidate.stem}_encoded.png")
-            self.output_var.set(str(self.output_path))
+            self.output_var.set(self.output_path.name)
+            self.output_detail.configure(text=f"Will save in {self.output_path.parent}")
         if self.mode == "recover" and hasattr(self, "recover_source_var"):
             self.recover_source_var.set(candidate.name)
         self.caption_var.set(f"Carrier · {candidate.name}")
@@ -549,7 +552,8 @@ class LatticeApp:
         )
         if path:
             self.output_path = Path(path)
-            self.output_var.set(path)
+            self.output_var.set(self.output_path.name)
+            self.output_detail.configure(text=f"Will save in {self.output_path.parent}")
 
     def choose_recovery_output(self) -> None:
         path = filedialog.asksaveasfilename(
@@ -560,7 +564,7 @@ class LatticeApp:
         )
         if path:
             self.output_path = Path(path)
-            self.output_var.set(path)
+            self.output_var.set(self.output_path.name)
 
     def _text_modified(self, _event=None) -> None:
         if hasattr(self, "payload_text") and self.payload_text.edit_modified():
@@ -569,13 +573,18 @@ class LatticeApp:
 
     def _current_payload(self) -> bytes:
         if self.payload_kind == "text":
+            if not hasattr(self, "payload_text") or not self.payload_text.winfo_exists():
+                return b""
             return self.payload_text.get("1.0", "end-1c").encode("utf-8")
         if not self.payload_path:
             return b""
         return self.payload_path.read_bytes()
 
     def _update_capacity(self) -> None:
-        if not hasattr(self, "capacity_canvas"):
+        if (
+            not hasattr(self, "capacity_canvas")
+            or not self.capacity_canvas.winfo_exists()
+        ):
             return
         try:
             self.payload_bytes = len(self._current_payload())
@@ -702,7 +711,10 @@ class LatticeApp:
         height = max(80, self.proof.winfo_height())
         self.proof.delete("all")
         try:
-            source = tk.PhotoImage(master=self.root, file=str(self.preview_path))
+            display_path = self.preview_path
+            if self.preview_path == SAMPLE_PLATE and width < 1200:
+                display_path = COMPACT_PLATE
+            source = tk.PhotoImage(master=self.root, file=str(display_path))
             scale = max(width / source.width(), height / source.height())
             fraction = Fraction(scale).limit_denominator(8)
             numerator = max(1, fraction.numerator)
