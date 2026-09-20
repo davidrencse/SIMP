@@ -128,6 +128,7 @@ Lattice always writes a lossless PNG. Converting the encoded file to JPEG, resiz
 ├── steg.py                 # PNG codec, LSB engine, and CLI
 ├── lattice.bat             # Double-click launcher for Windows
 ├── assets/plates/          # Built-in carrier and preview images
+├── assets/fonts/           # Bundled Libre Caslon Text font and OFL license
 ├── docs/assets/            # README artwork and product screenshot
 ├── sample.png              # Small carrier fixture
 └── hidden.png              # Small encoded fixture

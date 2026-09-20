@@ -1,0 +1,200 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-20T01:41:22Z",
+  "title": "Design System: Lattice",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Matte Proof Paper",
+        "canonical": "#E7E6DD",
+        "tonalRamp": ["oklch(15% 0.012 101.5)", "oklch(27% 0.012 101.5)", "oklch(39% 0.012 101.5)", "oklch(51% 0.012 101.5)", "oklch(63% 0.012 101.5)", "oklch(75% 0.012 101.5)", "oklch(87% 0.012 101.5)", "oklch(95% 0.012 101.5)"]
+      },
+      "paper-light": {
+        "role": "neutral",
+        "displayName": "Light Bench Paper",
+        "canonical": "#F3F1E9",
+        "tonalRamp": ["oklch(15% 0.011 95.2)", "oklch(27% 0.011 95.2)", "oklch(39% 0.011 95.2)", "oklch(51% 0.011 95.2)", "oklch(63% 0.011 95.2)", "oklch(75% 0.011 95.2)", "oklch(87% 0.011 95.2)", "oklch(95% 0.011 95.2)"]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Near-Black Ink",
+        "canonical": "#26241F",
+        "tonalRamp": ["oklch(15% 0.010 88.8)", "oklch(27% 0.010 88.8)", "oklch(39% 0.010 88.8)", "oklch(51% 0.010 88.8)", "oklch(63% 0.010 88.8)", "oklch(75% 0.010 88.8)", "oklch(87% 0.010 88.8)", "oklch(95% 0.010 88.8)"]
+      },
+      "muted-ink": {
+        "role": "neutral",
+        "displayName": "Graphite Note",
+        "canonical": "#595750",
+        "tonalRamp": ["oklch(15% 0.011 93.7)", "oklch(27% 0.011 93.7)", "oklch(39% 0.011 93.7)", "oklch(51% 0.011 93.7)", "oklch(63% 0.011 93.7)", "oklch(75% 0.011 93.7)", "oklch(87% 0.011 93.7)", "oklch(95% 0.011 93.7)"]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Pencil Rule",
+        "canonical": "#AAA89F",
+        "tonalRamp": ["oklch(15% 0.013 96.5)", "oklch(27% 0.013 96.5)", "oklch(39% 0.013 96.5)", "oklch(51% 0.013 96.5)", "oklch(63% 0.013 96.5)", "oklch(75% 0.013 96.5)", "oklch(87% 0.013 96.5)", "oklch(95% 0.013 96.5)"]
+      },
+      "sage": {
+        "role": "secondary",
+        "displayName": "Muted Sage",
+        "canonical": "#75877B",
+        "tonalRamp": ["oklch(15% 0.028 156.3)", "oklch(27% 0.028 156.3)", "oklch(39% 0.028 156.3)", "oklch(51% 0.028 156.3)", "oklch(63% 0.028 156.3)", "oklch(75% 0.028 156.3)", "oklch(87% 0.028 156.3)", "oklch(95% 0.028 156.3)"]
+      },
+      "sage-dark": {
+        "role": "secondary",
+        "displayName": "Local Sage",
+        "canonical": "#53685C",
+        "tonalRamp": ["oklch(15% 0.032 160.0)", "oklch(27% 0.032 160.0)", "oklch(39% 0.032 160.0)", "oklch(51% 0.032 160.0)", "oklch(63% 0.032 160.0)", "oklch(75% 0.032 160.0)", "oklch(87% 0.032 160.0)", "oklch(95% 0.032 160.0)"]
+      },
+      "brick": {
+        "role": "primary",
+        "displayName": "Proof Brick",
+        "canonical": "#A74838",
+        "tonalRamp": ["oklch(15% 0.129 31.5)", "oklch(27% 0.129 31.5)", "oklch(39% 0.129 31.5)", "oklch(51% 0.129 31.5)", "oklch(63% 0.129 31.5)", "oklch(75% 0.129 31.5)", "oklch(87% 0.129 31.5)", "oklch(95% 0.129 31.5)"]
+      },
+      "brick-active": {
+        "role": "primary",
+        "displayName": "Pressed Brick",
+        "canonical": "#8C382D",
+        "tonalRamp": ["oklch(15% 0.117 29.8)", "oklch(27% 0.117 29.8)", "oklch(39% 0.117 29.8)", "oklch(51% 0.117 29.8)", "oklch(63% 0.117 29.8)", "oklch(75% 0.117 29.8)", "oklch(87% 0.117 29.8)", "oklch(95% 0.117 29.8)"]
+      },
+      "field-white": {
+        "role": "neutral",
+        "displayName": "Field White",
+        "canonical": "#FBFAF5",
+        "tonalRamp": ["oklch(15% 0.007 97.3)", "oklch(27% 0.007 97.3)", "oklch(39% 0.007 97.3)", "oklch(51% 0.007 97.3)", "oklch(63% 0.007 97.3)", "oklch(75% 0.007 97.3)", "oklch(87% 0.007 97.3)", "oklch(95% 0.007 97.3)"]
+      },
+      "error": {
+        "role": "primary",
+        "displayName": "Error Oxide",
+        "canonical": "#8E2F2A",
+        "tonalRamp": ["oklch(15% 0.130 26.7)", "oklch(27% 0.130 26.7)", "oklch(39% 0.130 26.7)", "oklch(51% 0.130 26.7)", "oklch(63% 0.130 26.7)", "oklch(75% 0.130 26.7)", "oklch(87% 0.130 26.7)", "oklch(95% 0.130 26.7)"]
+      },
+      "preview-placeholder": {
+        "role": "neutral",
+        "displayName": "Empty Proof Gray",
+        "canonical": "#D8D8D0",
+        "tonalRamp": ["oklch(15% 0.011 106.6)", "oklch(27% 0.011 106.6)", "oklch(39% 0.011 106.6)", "oklch(51% 0.011 106.6)", "oklch(63% 0.011 106.6)", "oklch(75% 0.011 106.6)", "oklch(87% 0.011 106.6)", "oklch(95% 0.011 106.6)"]
+      },
+      "secondary-active": {
+        "role": "neutral",
+        "displayName": "Pressed Paper",
+        "canonical": "#D8D6CD",
+        "tonalRamp": ["oklch(15% 0.012 96.4)", "oklch(27% 0.012 96.4)", "oklch(39% 0.012 96.4)", "oklch(51% 0.012 96.4)", "oklch(63% 0.012 96.4)", "oklch(75% 0.012 96.4)", "oklch(87% 0.012 96.4)", "oklch(95% 0.012 96.4)"]
+      },
+      "capacity-track": {
+        "role": "neutral",
+        "displayName": "Capacity Track",
+        "canonical": "#D0CEC5",
+        "tonalRamp": ["oklch(15% 0.012 96.4)", "oklch(27% 0.012 96.4)", "oklch(39% 0.012 96.4)", "oklch(51% 0.012 96.4)", "oklch(63% 0.012 96.4)", "oklch(75% 0.012 96.4)", "oklch(87% 0.012 96.4)", "oklch(95% 0.012 96.4)"]
+      }
+    },
+    "typographyMeta": {
+      "display": {"displayName": "Lattice Display", "purpose": "The application wordmark only."},
+      "station-title": {"displayName": "Station Title", "purpose": "Names each stage of the processing bench."},
+      "action": {"displayName": "Primary Action", "purpose": "Decisive create and recover controls."},
+      "body": {"displayName": "Native Body", "purpose": "Input content and supporting explanations."},
+      "carrier-label": {"displayName": "Carrier Label", "purpose": "Labels the artifact directly above the proof."},
+      "data": {"displayName": "Operational Data", "purpose": "Modes, filenames, measurements, captions, and safety assurances."},
+      "annotation": {"displayName": "Proof Annotation", "purpose": "Carrier facts and suitability notes in the proof margin only."}
+    },
+    "shadows": [],
+    "motion": [],
+    "breakpoints": [
+      {"name": "compact-docket", "value": "1320px"},
+      {"name": "minimum-window", "value": "1200px × 800px"}
+    ]
+  },
+  "components": [
+    {
+      "name": "Hide / Recover Switch",
+      "kind": "nav",
+      "refersTo": "mode-selected",
+      "description": "A static HTML preview of the native two-button mode selector; selection is represented by the brick-filled button.",
+      "html": "<div class=\"ds-mode-switch\" role=\"group\" aria-label=\"Processing mode\"><button class=\"ds-mode-button ds-mode-button-selected\" aria-pressed=\"true\">Hide</button><button class=\"ds-mode-button\" aria-pressed=\"false\">Recover</button></div>",
+      "css": ".ds-mode-switch{display:grid;grid-template-columns:1fr 1fr;background:#AAA89F;padding:1px;width:330px}.ds-mode-button{border:0;border-radius:0;background:#F3F1E9;color:#26241F;padding:14px 15px;font:400 12px Consolas,monospace;cursor:pointer}.ds-mode-button-selected{background:#A74838;color:#FBFAF5}.ds-mode-button:active{background:#D8D6CD}.ds-mode-button-selected:active{background:#8C382D}.ds-mode-button:focus-visible{outline:1px solid #26241F;outline-offset:0}"
+    },
+    {
+      "name": "Primary Processing Action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The native create or recover action translated into a self-contained preview, including its four-square registration stamp.",
+      "html": "<button class=\"ds-primary-action\"><span class=\"ds-primary-stamp\" aria-hidden=\"true\"><i></i><i></i><i></i><i></i></span>Create encoded PNG</button>",
+      "css": ".ds-primary-action{display:flex;align-items:center;justify-content:center;gap:16px;width:100%;border:1px solid #A74838;border-radius:0;background:#A74838;color:#FBFAF5;padding:32px 15px;font:400 17px 'Libre Caslon Text','Book Antiqua',serif;cursor:pointer}.ds-primary-action:active{background:#8C382D}.ds-primary-action:focus-visible{outline:1px solid #26241F;outline-offset:0}.ds-primary-stamp{display:grid;grid-template-columns:6px 6px;grid-template-rows:6px 6px;gap:2px}.ds-primary-stamp i{display:block;background:#FBFAF5}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "The flat native chooser control used for files and output destinations.",
+      "html": "<button class=\"ds-secondary-button\">Choose output…</button>",
+      "css": ".ds-secondary-button{border:1px solid #AAA89F;border-radius:0;background:#F3F1E9;color:#26241F;padding:6px 15px;font:400 12px Consolas,monospace;cursor:pointer}.ds-secondary-button:active{background:#D8D6CD}.ds-secondary-button:focus-visible{outline:1px solid #26241F;outline-offset:0}"
+    },
+    {
+      "name": "Payload Text Field",
+      "kind": "input",
+      "refersTo": "text-field",
+      "description": "The square native text surface used for UTF-8 payload entry.",
+      "html": "<textarea class=\"ds-payload-field\" rows=\"4\">Meet at the north trailhead at 7. Bring the maps.</textarea>",
+      "css": ".ds-payload-field{display:block;width:100%;min-height:92px;box-sizing:border-box;resize:none;border:1px solid #AAA89F;border-radius:0;background:#FBFAF5;color:#26241F;padding:4px;font:400 12px 'Segoe UI',sans-serif}.ds-payload-field:focus-visible{outline:1px solid #A74838;outline-offset:0}"
+    },
+    {
+      "name": "Processing Station",
+      "kind": "card",
+      "refersTo": "station",
+      "description": "A representative flat bench station with its line icon, editorial heading, rule, and operational content.",
+      "html": "<section class=\"ds-station\"><header class=\"ds-station-heading\"><svg viewBox=\"0 0 20 20\" aria-hidden=\"true\"><path d=\"M4 2.5h8l4 4V18H4zM12 2.5v4h4\"/></svg><span>Output</span></header><div class=\"ds-station-rule\"></div><div class=\"ds-station-field\">lattice_encoded.png</div><p>The source image stays unchanged.</p></section>",
+      "css": ".ds-station{box-sizing:border-box;border:1px solid #AAA89F;border-radius:0;background:#F3F1E9;color:#26241F;padding:17px 20px;width:330px}.ds-station-heading{display:flex;align-items:center;gap:8px;font:400 18px 'Libre Caslon Text','Book Antiqua',serif}.ds-station-heading svg{width:20px;height:20px;fill:none;stroke:#26241F;stroke-width:1}.ds-station-rule{height:1px;background:#AAA89F;margin:8px 0 12px}.ds-station-field{border:1px solid #AAA89F;background:#FBFAF5;padding:8px 4px;font:400 12px 'Segoe UI',sans-serif}.ds-station p{margin:10px 0 0;color:#595750;font:400 11px Consolas,monospace}"
+    },
+    {
+      "name": "Capacity Meter",
+      "kind": "custom",
+      "refersTo": "station",
+      "description": "A text-redundant native capacity indicator; sage means the payload fits and oxide is reserved for overflow.",
+      "html": "<div class=\"ds-capacity\"><div class=\"ds-capacity-track\" role=\"meter\" aria-valuemin=\"0\" aria-valuemax=\"255400\" aria-valuenow=\"49\"><span></span></div><p>49 B of 255.4 KB (0.02%)</p><dl><div><dt>Estimated capacity</dt><dd>255.4 KB</dd></div><div><dt>Remaining space</dt><dd>255.3 KB</dd></div><div><dt>Suitable</dt><dd>Yes — fits this carrier</dd></div></dl></div>",
+      "css": ".ds-capacity{width:330px;color:#595750;font:400 12px 'Segoe UI',sans-serif}.ds-capacity-track{height:18px;background:#D0CEC5}.ds-capacity-track span{display:block;width:4px;height:100%;background:#75877B}.ds-capacity p{margin:10px 0 26px}.ds-capacity dl{margin:0}.ds-capacity dl div{display:flex;gap:8px}.ds-capacity dt,.ds-capacity dd{margin:0}.ds-capacity dd{color:#26241F}"
+    },
+    {
+      "name": "Carrier Proof Frame",
+      "kind": "custom",
+      "refersTo": "proof-frame",
+      "description": "The square-edged focusable proof field and handwritten metadata rail, represented without an external image dependency.",
+      "html": "<div class=\"ds-proof-wrap\"><button class=\"ds-proof\" aria-label=\"Choose carrier PNG\"><span class=\"ds-proof-label\">CARRIER PROOF</span><i class=\"ds-crop ds-crop-tl\"></i><i class=\"ds-crop ds-crop-tr\"></i><i class=\"ds-crop ds-crop-bl\"></i><i class=\"ds-crop ds-crop-br\"></i></button><aside class=\"ds-proof-meta\">1336 × 522<br>PNG<br>RGB<br><br>Capacity<br>255.4 KB<br><br><br>Suitable<br>carrier.</aside></div>",
+      "css": ".ds-proof-wrap{display:grid;grid-template-columns:minmax(420px,1fr) 76px;gap:14px;padding:14px;background:#E7E6DD}.ds-proof{position:relative;min-height:260px;border:2px solid #AAA89F;border-radius:0;background:#D8D8D0;color:#595750;font:400 12px Consolas,monospace;cursor:pointer}.ds-proof:focus-visible{outline:2px solid #A74838;outline-offset:0}.ds-proof-label{letter-spacing:.12em}.ds-crop{position:absolute;width:28px;height:28px}.ds-crop:before,.ds-crop:after{content:'';position:absolute;background:#26241F}.ds-crop:before{width:28px;height:1px}.ds-crop:after{width:1px;height:28px}.ds-crop-tl{left:9px;top:9px}.ds-crop-tr{right:9px;top:9px;transform:rotate(90deg)}.ds-crop-bl{left:9px;bottom:9px;transform:rotate(270deg)}.ds-crop-br{right:9px;bottom:9px;transform:rotate(180deg)}.ds-proof-meta{text-align:right;color:#595750;font:400 14px 'Segoe Print',cursive}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Photographic Proofing Bench",
+    "overview": "Lattice presents local steganography as careful photographic handling. The carrier image is the artifact under inspection, given most of the window and surrounded by the familiar evidence of a proofing bench: matte stock, hairline rules, crop marks, measurement notes, and a restrained caption rail.\n\nThe interface is calm, exact, and visibly local. Editorial type gives the tool a human title and decisive actions; monospaced copy carries file facts and safety assurances; handwritten annotations make the carrier metadata feel observed rather than instrument-panel dense. The system rejects hacker-console theatrics and generic stacked-file-form composition while preserving obvious native controls, visible focus, and direct keyboard operation.",
+    "keyCharacteristics": [
+      "The carrier photograph remains visually dominant.",
+      "Warm matte paper and near-black ink establish the default visual field.",
+      "Brick red is reserved for the selected mode and primary action.",
+      "Sage marks safe local status and usable capacity.",
+      "Hairlines, crop marks, captions, and measurements organize the interface without elevation.",
+      "Wide layouts use one horizontal processing bench; compact layouts turn that bench into a vertical docket beside the proof."
+    ],
+    "rules": [
+      {"name": "The One Red Action Rule", "body": "Proof Brick identifies the current choice or the next decisive action; it does not decorate headings, rules, metadata, or the photograph.", "section": "colors"},
+      {"name": "The Paper, Not Chrome Rule", "body": "Large regions stay within the two paper neutrals. Structure comes from ink, spacing, and hairlines rather than tinted panels.", "section": "colors"},
+      {"name": "The Three Voices Rule", "body": "Serif names and commits, monospace reports and assures, sans-serif supports input; handwriting belongs only beside the carrier proof.", "section": "typography"},
+      {"name": "The Proof Leads Rule", "body": "New layouts may change the bench flow, but they must not demote the carrier to a thumbnail or let controls become the largest visual object.", "section": "layout"},
+      {"name": "The Flat Proof Rule", "body": "Do not introduce drop shadows, floating cards, glass effects, or simulated elevation; use a paper change or a one-pixel rule when a boundary is necessary.", "section": "elevation"},
+      {"name": "The Cut-Paper Rule", "body": "Keep component silhouettes rectangular and crisp. Rounded cards, pills, and capsule toggles are outside this system.", "section": "shapes"}
+    ],
+    "dos": [
+      "Do preserve the carrier image as the dominant visual artifact in both wide and compact compositions.",
+      "Do reserve Proof Brick for selection, editable focus, and the primary processing action.",
+      "Do pair every capacity or status color with explicit text.",
+      "Do keep keyboard focus visible and preserve Alt+H, Alt+R, Ctrl+O, and Ctrl+Enter operation.",
+      "Do use paper tones, rules, crop marks, captions, and measurement notes to express the photographic proofing world."
+    ],
+    "donts": [
+      "Don't introduce terminal green, neon cyber styling, scan-line effects, or hacker-console language.",
+      "Don't add shadows, rounded cards, pill controls, gradients, or decorative glass effects.",
+      "Don't spread brick red across headings, borders, metadata, or passive decoration.",
+      "Don't use handwriting anywhere except the proof's measurement and suitability notes.",
+      "Don't shrink the carrier into a token thumbnail when the window narrows; reflow the bench into the vertical docket."
+    ]
+  }
+}
