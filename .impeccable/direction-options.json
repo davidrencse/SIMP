@@ -1,0 +1,133 @@
+{
+  "title": "Choose the desktop app’s visual world",
+  "question": "Pick the interface language for the local Hide / Recover workflow, or re-roll for a fresh set.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "Contact Sheet",
+      "kicker": "THE ROLL",
+      "lineage": "photographic proof sheets and darkroom crop notes",
+      "thesis": "Treat every encode as a careful before-and-after image proof, with the payload recorded in the margin.",
+      "palette": ["#F2EFE7", "#171815", "#B84B32", "#7E8B82", "#D8D2C3"],
+      "materials": ["matte proof paper", "crop marks", "grease-pencil notes"],
+      "viewport": "A large image proof anchors the left while one disciplined task column on the right moves from image to payload to output.",
+      "risk": "The photographic references become decorative if the preview and capacity readout do not drive the task.",
+      "raised": [
+        {"from": "Normalled jackfield", "raise": "Every processing state gains a redundant line pattern and explicit text, never color alone."},
+        {"from": "Cutting bench", "raise": "The current file remains visibly pinned in place through the entire operation."},
+        {"from": "Ticket wallet", "raise": "Completed outputs remain as a visible receipt instead of disappearing into a toast."}
+      ],
+      "comp": ".impeccable/mocks/decision/assigned.webp"
+    },
+    {
+      "id": "model-pick",
+      "label": "Specimen Register",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "conservation lab accession sheets",
+      "thesis": "Each carrier image is a specimen with provenance, measured capacity, and a clear chain of handling.",
+      "palette": ["#E9E4D6", "#27302C", "#315D52", "#A8623B", "#FBFAF5"],
+      "materials": ["archival paper", "index tabs", "measurement rules"],
+      "viewport": "A broad specimen panel sits beside a precise record form, with Hide and Recover as two ledger tabs.",
+      "risk": "The strongest familiar fit for a careful local utility, but easier to make conventional than the assigned direction.",
+      "comp": ".impeccable/mocks/decision/model-pick.webp"
+    },
+    {
+      "id": "challenger-cutting-bench",
+      "label": "Cutting Bench",
+      "verdict": "competitive",
+      "lineage": "film work prints and edit-bench select rails",
+      "thesis": "The workflow becomes a short strip of pinned frames: source, payload, and finished proof.",
+      "palette": ["#0D0D0C", "#EE6B2F", "#F5F1E8", "#3B3A36"],
+      "materials": ["film perforations", "tape flags", "grease crosses"],
+      "viewport": "A horizontal three-frame strip makes the operation visible at a glance, with the active frame flagged in orange.",
+      "case": "Strong image-world recognition and clear progress, but less comfortable for long paths and error copy than Contact Sheet.",
+      "risk": "Can feel like a media editor when the product only needs two focused operations.",
+      "comp": ".impeccable/mocks/decision/challenger-cutting-bench.webp",
+      "hero": "https://impeccable.style/worlds/cards/operate-a-cutting-bench-select-rail-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/operate-a-cutting-bench-select-rail.webp"
+    },
+    {
+      "id": "challenger-jackfield",
+      "label": "Normalled Jackfield",
+      "verdict": "declined",
+      "lineage": "machine-room patch schedules",
+      "thesis": "Input and output paths connect as explicit signal routes.",
+      "palette": ["#090A08", "#E4A836", "#F4ECD8"],
+      "materials": ["black glass", "amber link rails"],
+      "viewport": "Numbered lanes connect the carrier, payload, and destination.",
+      "case": "Excellent state clarity, but it overstates the tool’s complexity and leans toward a hacker-console stereotype.",
+      "kept": "Redundant non-color state language.",
+      "risk": "Too technical for a two-task desktop utility.",
+      "hero": "https://impeccable.style/worlds/cards/operate-b-normalled-jackfield-hero.webp"
+    },
+    {
+      "id": "challenger-ticket-wallet",
+      "label": "Ticket Wallet",
+      "verdict": "declined",
+      "lineage": "jet-age coupon books",
+      "thesis": "Hide and Recover become two detachable processing coupons.",
+      "palette": ["#F8F5EC", "#17345D", "#C53C32", "#5E4773"],
+      "materials": ["coupon stock", "carbon numerals"],
+      "viewport": "A two-coupon wallet shows the current task and its retained receipt.",
+      "case": "The sequence is clear, but travel language does not belong to image steganography.",
+      "kept": "Completed work stays visible as a receipt.",
+      "risk": "Metaphor can obscure file handling.",
+      "hero": "https://impeccable.style/worlds/cards/vernacular-ephemera-jet-age-ticket-wallet-hero.webp"
+    },
+    {
+      "id": "challenger-generative",
+      "label": "Generative Identity",
+      "verdict": "declined",
+      "lineage": "parametric identity systems",
+      "thesis": "The image’s byte pattern reseeds the interface accents.",
+      "palette": ["#F7F7F4", "#222222", "#3B6FF5", "#D84A8A"],
+      "materials": ["flat vectors", "seeded geometry"],
+      "viewport": "A live mark changes as files are selected.",
+      "case": "It dramatizes encoding but creates visual churn in a task that needs trust and repeatability.",
+      "kept": "One coherent rule should govern every state change.",
+      "risk": "Variation weakens recognition and calm.",
+      "hero": "https://impeccable.style/worlds/cards/generative-parametric-identity-hero.webp"
+    },
+    {
+      "id": "challenger-streetwear",
+      "label": "Industrial Labels",
+      "verdict": "declined",
+      "lineage": "stockroom labels and safety tags",
+      "thesis": "Literal labels make every file operation unmistakable.",
+      "palette": ["#FAFAF7", "#111111", "#E86925"],
+      "materials": ["nylon labels", "safety tags"],
+      "viewport": "Large literal zones label source, payload, and output.",
+      "case": "Direct language helps clarity, but the aggressive styling mismatches a careful local tool.",
+      "kept": "Controls use literal verbs and explicit outcomes.",
+      "risk": "Visual urgency implies danger where calm is needed.",
+      "hero": "https://impeccable.style/worlds/cards/textiles-weave-drape-fashion-industrial-quote-grammar-hero.webp"
+    },
+    {
+      "id": "challenger-cloud-quarry",
+      "label": "Cloud Quarry",
+      "verdict": "declined",
+      "lineage": "surreal constructive landscapes",
+      "thesis": "Payload bytes are cut into visible image blocks and reassembled.",
+      "palette": ["#F5F6F3", "#5AA8DB", "#4D5962", "#BFC7CC"],
+      "materials": ["cumulus mass", "silver cut lines"],
+      "viewport": "A carrier image opens into layered blocks around the task controls.",
+      "case": "Memorable but materially less clear and less trustworthy than a photographic proofing world.",
+      "kept": "The selected image should remain the dominant object, not a thumbnail.",
+      "risk": "Surreal imagery competes with the actual file preview.",
+      "hero": "https://impeccable.style/worlds/cards/dream-surreal-impossible-worlds-cloud-quarry-hero.webp"
+    }
+  ],
+  "reroll": {"registers": ["safer", "bolder"]},
+  "buildPath": {"value": "comp", "toggle": true},
+  "canon": true,
+  "canonCard": {
+    "label": "The category standard",
+    "thesis": "A conventional desktop utility with tabs, file pickers, a preview pane, and one primary action.",
+    "palette": ["#F5F6F8", "#20242A", "#2563EB", "#FFFFFF"],
+    "materials": ["native panels", "standard controls"],
+    "viewport": "Two tabs sit over a centered form and preview with familiar platform spacing.",
+    "risk": "Immediately understandable but visually indistinguishable from most file utilities.",
+    "comp": ".impeccable/mocks/decision/canon.webp"
+  },
+  "steer": true
+}

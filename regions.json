@@ -1,0 +1,26 @@
+{
+  "regions": [
+    {"id": "app-title", "kind": "text", "grid": "A0:B0", "note": "Lattice wordmark"},
+    {"id": "app-subtitle", "kind": "text", "grid": "B0:D0", "note": "product description and local-only line"},
+    {"id": "mode-switch", "kind": "control", "grid": "E0:F0", "note": "Hide and Recover segmented control"},
+    {"id": "local-status", "kind": "text", "grid": "I0:J0", "note": "local-only reassurance"},
+    {"id": "carrier-label", "kind": "text", "grid": "A1:B1", "note": "Carrier image label"},
+    {"id": "carrier-photo", "kind": "plate", "grid": "A1:I6", "note": "selected carrier image proof, cropped within proof frame", "bleed": true},
+    {"id": "carrier-measurements", "kind": "text", "grid": "J1:J3", "note": "dimensions, format, and bit depth"},
+    {"id": "carrier-note", "kind": "text", "grid": "J3:J6", "note": "carrier suitability notes"},
+    {"id": "proof-caption", "kind": "text", "grid": "A6:D6", "note": "semantic carrier label beneath the preview", "codeDrawn": true},
+    {"id": "proof-assurance", "kind": "text", "grid": "H6:J6", "note": "local-only proof footer"},
+    {"id": "bench-left", "kind": "chrome", "grid": "A7:E9", "note": "left half of ruled processing bench"},
+    {"id": "bench-right", "kind": "chrome", "grid": "F7:J9", "note": "right half of ruled processing bench"},
+    {"id": "payload-heading", "kind": "text", "grid": "A7:B7", "note": "Payload station heading"},
+    {"id": "payload-picker", "kind": "control", "grid": "A8:B8", "note": "text or file payload selector"},
+    {"id": "payload-details", "kind": "text", "grid": "A9:B9", "note": "payload name, size, and type"},
+    {"id": "capacity-heading", "kind": "text", "grid": "C7:E7", "note": "Capacity station heading"},
+    {"id": "capacity-meter", "kind": "control", "grid": "C8:E8", "note": "payload usage progress meter"},
+    {"id": "capacity-details", "kind": "text", "grid": "C9:E9", "note": "estimated capacity and remaining space"},
+    {"id": "output-heading", "kind": "text", "grid": "F7:G7", "note": "Output station heading"},
+    {"id": "output-picker", "kind": "control", "grid": "F8:G8", "note": "output path selector"},
+    {"id": "output-details", "kind": "text", "grid": "F9:G9", "note": "file name and location"},
+    {"id": "primary-action", "kind": "control", "grid": "H7:J8", "note": "Create encoded PNG primary action"}
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "title": "Choose the Contact Sheet composition",
+  "question": "Which layout should become the desktop app?",
+  "options": [
+    {
+      "id": "proof-and-docket",
+      "label": "Proof + docket",
+      "thesis": "A dominant proof on the left and a single task docket on the right.",
+      "palette": ["#F2EFE7", "#171815", "#B84B32", "#7E8B82"],
+      "materials": ["matte proof paper", "crop marks"],
+      "viewport": "The image owns 55 percent of the window; the task reads top to bottom beside it.",
+      "risk": "The safest and clearest composition, with less room for multiple recent files.",
+      "comp": ".impeccable/mocks/decision/assigned.webp"
+    },
+    {
+      "id": "contact-rail",
+      "label": "Contact rail",
+      "thesis": "A vertical strip keeps source and result proofs visible beside the selected image.",
+      "palette": ["#F2EFE7", "#171815", "#B84B32", "#7E8B82"],
+      "materials": ["contact strip", "matte proof paper"],
+      "viewport": "A narrow proof rail, central image, and compact right docket divide the window into three zones.",
+      "risk": "More expressive, but denser at small window sizes.",
+      "comp": ".impeccable/mocks/contact-sheet-b.webp"
+    },
+    {
+      "id": "wide-proof",
+      "label": "Wide proof",
+      "thesis": "The image spans the window while the workflow becomes one horizontal processing bench.",
+      "palette": ["#F2EFE7", "#171815", "#B84B32", "#7E8B82"],
+      "materials": ["wide proof", "measurement margin"],
+      "viewport": "The proof fills the upper two-thirds; four grouped task stations run along the bottom.",
+      "risk": "Most image-forward, but file paths have less horizontal room than they appear to.",
+      "comp": ".impeccable/mocks/contact-sheet-c.webp"
+    }
+  ],
+  "steer": true
+}

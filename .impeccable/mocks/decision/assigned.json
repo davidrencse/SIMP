@@ -1,0 +1,6 @@
+{
+  "tool": "built-in image generation",
+  "useCase": "ui-mockup",
+  "prompt": "Full-fidelity desktop UI direction comp for Lattice, a safe local PNG steganography app. Contact-sheet and darkroom-proofing world; large carrier preview left, disciplined image/payload/output workflow right; matte proof paper, crop marks, brick-red action; no hacker imagery, terminal, gradients, glass, malware references, or generic SaaS cards.",
+  "approved": false
+}

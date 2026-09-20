@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Scaffold reference: contact-sheet-c.webp</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400&display=swap">
+  <link rel="stylesheet" href="layout.css">
+  <style>html,body{margin:0}body{background:#e7e6dd}.region{box-sizing:border-box}.region.text p{white-space:pre-wrap}</style>
+</head>
+<body>
+<!-- Reference only. Every region sits at its measured box inside a comp-aspect frame. Take the boxes (layout.css), keep your own semantic structure. -->
+<main class="comp-frame" style="max-width:1536px">
+  <div class="r-app-title region text" data-region="app-title"><!-- Lattice wordmark --><p style="font-size:var(--r-app-title-font);font-family:var(--r-app-title-family),sans-serif;font-weight:var(--r-app-title-weight);line-height:1.05;margin:0">app-title</p></div>
+  <div class="r-app-subtitle region text" data-region="app-subtitle"><!-- product description and local-only line --><p style="font-size:var(--r-app-subtitle-font);line-height:1.05;margin:0">app-subtitle</p></div>
+  <div class="r-mode-switch region control" data-region="mode-switch"><!-- Hide and Recover segmented control: rebuild the control's chrome from the crop (comp-spec.mjs --crop mode-switch); its ink box, border, fill, radius, and label size are the comp's --></div>
+  <div class="r-local-status region text" data-region="local-status"><!-- local-only reassurance --><p style="font-size:var(--r-local-status-font);line-height:1.05;margin:0">local-status</p></div>
+  <div class="r-carrier-label region text" data-region="carrier-label"><!-- Carrier image label --><p style="font-size:var(--r-carrier-label-font);line-height:1.05;margin:0">carrier-label</p></div>
+  <figure class="r-carrier-photo region plate" data-region="carrier-photo"><img src="../../../assets/plates/carrier-photo.png" alt="" style="width:100%;height:100%;object-fit:contain;object-position:top left"></figure>
+  <div class="r-carrier-measurements region text" data-region="carrier-measurements"><!-- dimensions, format, and bit depth --><p style="line-height:1.05;margin:0">carrier-measurements</p></div>
+  <div class="r-carrier-note region text" data-region="carrier-note"><!-- carrier suitability notes --><p style="line-height:1.05;margin:0">carrier-note</p></div>
+  <div class="r-proof-caption region text" data-region="proof-caption"><!-- semantic carrier label beneath the preview --><p style="line-height:1.05;margin:0">proof-caption</p></div>
+  <div class="r-proof-assurance region text" data-region="proof-assurance"><!-- local-only proof footer --><p style="line-height:1.05;margin:0">proof-assurance</p></div>
+  <div class="r-bench-left region chrome" data-region="bench-left"><!-- left half of ruled processing bench --></div>
+  <div class="r-bench-right region chrome" data-region="bench-right"><!-- right half of ruled processing bench --></div>
+  <div class="r-payload-heading region text" data-region="payload-heading"><!-- Payload station heading --><p style="font-size:var(--r-payload-heading-font);line-height:1.05;margin:0">payload-heading</p></div>
+  <div class="r-payload-picker region control" data-region="payload-picker"><!-- text or file payload selector: rebuild the control's chrome from the crop (comp-spec.mjs --crop payload-picker); its ink box, border, fill, radius, and label size are the comp's --></div>
+  <div class="r-payload-details region text" data-region="payload-details"><!-- payload name, size, and type --><p style="line-height:1.05;margin:0">payload-details</p></div>
+  <div class="r-capacity-heading region text" data-region="capacity-heading"><!-- Capacity station heading --><p style="font-size:var(--r-capacity-heading-font);line-height:1.05;margin:0">capacity-heading</p></div>
+  <div class="r-capacity-meter region control" data-region="capacity-meter"><!-- payload usage progress meter: rebuild the control's chrome from the crop (comp-spec.mjs --crop capacity-meter); its ink box, border, fill, radius, and label size are the comp's --></div>
+  <div class="r-capacity-details region text" data-region="capacity-details"><!-- estimated capacity and remaining space --><p style="line-height:1.05;margin:0">capacity-details</p></div>
+  <div class="r-output-heading region text" data-region="output-heading"><!-- Output station heading --><p style="font-size:var(--r-output-heading-font);line-height:1.05;margin:0">output-heading</p></div>
+  <div class="r-output-picker region control" data-region="output-picker"><!-- output path selector: rebuild the control's chrome from the crop (comp-spec.mjs --crop output-picker); its ink box, border, fill, radius, and label size are the comp's --></div>
+  <div class="r-output-details region text" data-region="output-details"><!-- file name and location --><p style="line-height:1.05;margin:0">output-details</p></div>
+  <div class="r-primary-action region control" data-region="primary-action"><!-- Create encoded PNG primary action: rebuild the control's chrome from the crop (comp-spec.mjs --crop primary-action); its ink box, border, fill, radius, and label size are the comp's --></div>
+</main>
+</body>
+</html>

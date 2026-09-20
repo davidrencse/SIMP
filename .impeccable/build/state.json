@@ -1,0 +1,232 @@
+{
+  "tool": "build-phase",
+  "version": 2,
+  "startedAt": "2026-09-19T14:21:03.329Z",
+  "comp": ".impeccable/mocks/contact-sheet-c.webp",
+  "direction": "e5f4e669",
+  "breakpoint": "1536x1024",
+  "artifact": null,
+  "phase": "hero",
+  "phases": {
+    "comps": {
+      "status": "closed",
+      "openedAt": "2026-09-19T14:21:03.329Z",
+      "closedAt": "2026-09-19T14:30:52.148Z",
+      "attempts": 2,
+      "notes": [],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "3 comps, 1 approved",
+        "approved": ".impeccable/mocks/contact-sheet-c.webp",
+        "at": "2026-09-19T14:30:52.148Z"
+      },
+      "forced": null
+    },
+    "spec": {
+      "status": "closed",
+      "openedAt": "2026-09-19T14:30:52.238Z",
+      "closedAt": "2026-09-19T14:31:59.761Z",
+      "attempts": 1,
+      "notes": [],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "22 regions, 1 plates, 14 text regions measured",
+        "at": "2026-09-19T14:31:59.761Z"
+      },
+      "forced": null
+    },
+    "plates": {
+      "status": "closed",
+      "openedAt": "2026-09-19T14:31:59.761Z",
+      "closedAt": "2026-09-19T14:33:11.109Z",
+      "attempts": 1,
+      "notes": [],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "1/1 plates",
+        "at": "2026-09-19T14:33:11.109Z"
+      },
+      "forced": null
+    },
+    "hero": {
+      "status": "open",
+      "openedAt": "2026-09-19T14:33:11.109Z",
+      "closedAt": null,
+      "attempts": 0,
+      "notes": [],
+      "gate": {
+        "ok": false,
+        "reasons": [
+          "hero overall 64.0% < 72% (structure 58%, color 72%, detail 56%)",
+          "region app-title is missing (detail 0%, structure 47%): the comp shows material the build does not",
+          "region app-subtitle is missing (detail 0%, structure 71%): the comp shows material the build does not",
+          "region mode-switch is missing (detail 0%, structure 55%): the comp shows material the build does not",
+          "region local-status is missing (detail 5%, structure 83%): the comp shows material the build does not",
+          "region carrier-label is missing (detail 5%, structure 68%): the comp shows material the build does not",
+          "region carrier-measurements is missing (detail 0%, structure 83%): the comp shows material the build does not",
+          "region carrier-note is missing (detail 0%, structure 83%): the comp shows material the build does not",
+          "region bench-left is missing (detail 0%, structure 75%): the comp shows material the build does not",
+          "region bench-right is missing (detail 2%, structure 64%): the comp shows material the build does not",
+          "region payload-heading is missing (detail 0%, structure 71%): the comp shows material the build does not",
+          "region payload-picker is missing (detail 0%, structure 69%): the comp shows material the build does not",
+          "region payload-details is missing (detail 0%, structure 64%): the comp shows material the build does not",
+          "region capacity-heading is missing (detail 0%, structure 65%): the comp shows material the build does not",
+          "region capacity-meter is missing (detail 0%, structure 62%): the comp shows material the build does not",
+          "region capacity-details is missing (detail 0%, structure 95%): the comp shows material the build does not",
+          "region output-heading is missing (detail 0%, structure 64%): the comp shows material the build does not",
+          "region output-picker is missing (detail 0%, structure 66%): the comp shows material the build does not",
+          "region output-details is missing (detail 0%, structure 82%): the comp shows material the build does not",
+          "region primary-action is missing (detail 0%, structure 49%): the comp shows material the build does not",
+          "READINGS, each one CSS edit (3):",
+          "text carrier-measurements: ink is #0f0f0f in the build, #5f5b55 in the comp; use the comp's colour",
+          "text carrier-note: ink is #101010 in the build, #5d5a55 in the comp; use the comp's colour",
+          "text proof-assurance: ink is #e8e8d8 in the build, #747d82 in the comp; use the comp's colour"
+        ],
+        "summary": "hero 64% (drift)",
+        "score": 0.64,
+        "verdict": "drift",
+        "report": ".impeccable/review/diff/hero/report.json",
+        "sideBySide": "C:/Users/david/Desktop/imgexploit/.impeccable/review/diff/hero/side-by-side.png",
+        "worst": [
+          "primary-action missing 27%",
+          "mode-switch missing 31%",
+          "app-title missing 37%"
+        ],
+        "worstIds": [
+          "primary-action",
+          "mode-switch",
+          "app-title"
+        ],
+        "worstCrops": [
+          {
+            "id": "primary-action",
+            "verdict": "missing",
+            "score": {
+              "overall": 0.2694,
+              "structure": 0.4852,
+              "color": 0.1453,
+              "colorIntersection": 0.1113,
+              "paletteMatch": 0.1636,
+              "detail": 0.0011,
+              "detailRaw": 0.0323,
+              "detailAdded": 0.0625,
+              "bands": 0.4
+            },
+            "file": ".impeccable/review/diff/hero/regions/primary-action.png"
+          },
+          {
+            "id": "mode-switch",
+            "verdict": "missing",
+            "score": {
+              "overall": 0.3081,
+              "structure": 0.5474,
+              "color": 0.1765,
+              "colorIntersection": 0.0328,
+              "paletteMatch": 0.2539,
+              "detail": 0,
+              "detailRaw": 0,
+              "detailAdded": 0,
+              "bands": 0.4
+            },
+            "file": ".impeccable/review/diff/hero/regions/mode-switch.png"
+          },
+          {
+            "id": "app-title",
+            "verdict": "missing",
+            "score": {
+              "overall": 0.3709,
+              "structure": 0.4675,
+              "color": 0.3886,
+              "colorIntersection": 0.0767,
+              "paletteMatch": 0.5565,
+              "detail": 0,
+              "detailRaw": 0,
+              "detailAdded": 0,
+              "bands": 0.4
+            },
+            "file": ".impeccable/review/diff/hero/regions/app-title.png"
+          }
+        ],
+        "regionVerdicts": {
+          "app-title": "missing",
+          "app-subtitle": "missing",
+          "mode-switch": "missing",
+          "local-status": "missing",
+          "carrier-label": "missing",
+          "carrier-photo": "drift",
+          "carrier-measurements": "missing",
+          "carrier-note": "missing",
+          "proof-caption": "drift",
+          "proof-assurance": "drift",
+          "bench-left": "missing",
+          "bench-right": "missing",
+          "payload-heading": "missing",
+          "payload-picker": "missing",
+          "payload-details": "missing",
+          "capacity-heading": "missing",
+          "capacity-meter": "missing",
+          "capacity-details": "missing",
+          "output-heading": "missing",
+          "output-picker": "missing",
+          "output-details": "missing",
+          "primary-action": "missing"
+        },
+        "at": "2026-09-20T00:46:39.392Z"
+      },
+      "forced": null,
+      "records": 6,
+      "readingsSeen": {
+        "text carrier-measurements: ink is #0f0f0f in the build, #5f5b55 in the comp; use the comp's colour": 1,
+        "text carrier-note: ink is #101010 in the build, #5d5a55 in the comp; use the comp's colour": 1,
+        "text proof-assurance: ink is #e8e8d8 in the build, #747d82 in the comp; use the comp's colour": 1
+      }
+    },
+    "sections": {
+      "status": "pending",
+      "openedAt": null,
+      "closedAt": null,
+      "attempts": 0,
+      "notes": [],
+      "gate": null,
+      "forced": null
+    },
+    "motion": {
+      "status": "pending",
+      "openedAt": null,
+      "closedAt": null,
+      "attempts": 0,
+      "notes": [],
+      "gate": null,
+      "forced": null
+    },
+    "responsive": {
+      "status": "pending",
+      "openedAt": null,
+      "closedAt": null,
+      "attempts": 0,
+      "notes": [],
+      "gate": null,
+      "forced": null
+    },
+    "review": {
+      "status": "pending",
+      "openedAt": null,
+      "closedAt": null,
+      "attempts": 0,
+      "notes": [],
+      "gate": null,
+      "forced": null
+    }
+  },
+  "finish": null,
+  "plates": {
+    "carrier-photo": {
+      "status": "ok",
+      "score": 0.5616,
+      "size": "1881x836"
+    }
+  }
+}

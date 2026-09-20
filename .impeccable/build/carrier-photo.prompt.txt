@@ -1,0 +1,6 @@
+Use case: photorealistic-natural
+Asset type: opaque carrier-photo plate for a desktop UI sample preview
+Primary request: Recreate the reference as a clean, realistic panoramic mountain-lake photograph for a safe local image-steganography app. Preserve the same wide composition, calm lake, mountain range, foreground rocks and conifer island, natural late-afternoon light, and restrained gray-blue palette.
+Input images: Image 1 is the approved visual reference crop; match its composition and scale, but regenerate the photographic pixels.
+Composition/framing: 2.25:1 panoramic landscape, edge-to-edge, no margins or letterboxing.
+Constraints: no UI text, no labels, no interface chrome, no borders, no card corners, no drop shadows, no added objects, no people, no watermark; opaque full-frame image.
