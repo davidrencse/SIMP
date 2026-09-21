@@ -1,4 +1,4 @@
-"""Lattice: a local desktop UI for safe PNG steganography.
+"""SIMP: a local desktop UI for safe PNG steganography.
 
 The interface only embeds and extracts bytes. Recovered data is never executed.
 """
@@ -15,7 +15,7 @@ import threading
 import tkinter as tk
 from tkinter import filedialog, messagebox
 
-from steg import StegError, embed, extract, read_png
+from .steg import StegError, embed, extract, read_png
 
 
 ROOT = Path(__file__).resolve().parent
@@ -64,7 +64,7 @@ def readable_size(size: int) -> str:
     return f"{size / (1024 * 1024):.1f} MB"
 
 
-class LatticeApp:
+class SIMPApp:
     def __init__(self, root: tk.Tk, demo: bool = False) -> None:
         self.root = root
         self.mode = "hide"
@@ -81,9 +81,9 @@ class LatticeApp:
         self._last_width = 1536
         self.task_results: queue.Queue = queue.Queue()
 
-        root.title("Lattice — local PNG steganography")
+        root.title("SIMP - Steganographic Image Messaging Protocol")
         root.geometry("1536x985+0+0")
-        root.minsize(1200, 800)
+        root.minsize(1050, 700)
         root.configure(bg=PAPER)
         root.option_add("*Font", ("Segoe UI", 10))
 
@@ -96,7 +96,7 @@ class LatticeApp:
         if demo:
             self.carrier_path = SAMPLE_PLATE
             self.payload_text.insert("1.0", "Meet at the north trailhead at 7. Bring the maps.")
-            self.output_path = ROOT / "lattice_encoded.png"
+            self.output_path = Path.cwd() / "simp_encoded.png"
             self.output_var.set(self.output_path.name)
             self._inspect_carrier(SAMPLE_PLATE)
             self.caption_var.set("Carrier · sample landscape.png")
@@ -114,7 +114,7 @@ class LatticeApp:
         header.place(relx=0.03, rely=0.0, relwidth=0.94, relheight=0.10)
 
         tk.Label(
-            header, text="Lattice", bg=PAPER, fg=INK, font=(DISPLAY_FACE, 42)
+            header, text="SIMP", bg=PAPER, fg=INK, font=(DISPLAY_FACE, 42)
         ).place(relx=0.0, rely=-0.08)
         self.title_rule = tk.Frame(header, bg=INK, width=1)
         self.title_rule.place(relx=0.135, rely=0.08, relheight=0.62)
@@ -222,7 +222,7 @@ class LatticeApp:
         self.caption_label.place(relx=0.05, rely=0.652, relwidth=0.53, relheight=0.035)
         self.assurance_label = tk.Label(
             self.root,
-            text="LATTICE   ·   LOCAL ONLY   ·   DATA IS NEVER EXECUTED",
+            text="SIMP   ·   LOCAL ONLY   ·   DATA IS NEVER EXECUTED",
             bg=PAPER,
             fg=MUTED,
             anchor="e",
@@ -398,7 +398,7 @@ class LatticeApp:
             wraplength=190 if self.compact else 220,
             bg=PAPER_LIGHT,
             fg=MUTED,
-            font=(DATA_FACE, 7 if self.compact else 8),
+            font=(DATA_FACE, 8),
         )
         self.output_detail.pack(fill="x", pady=(10, 0))
 
@@ -477,7 +477,7 @@ class LatticeApp:
             wraplength=210 if self.compact else 290,
             bg=PAPER_LIGHT,
             fg=MUTED,
-            font=(DATA_FACE, 7 if self.compact else 8),
+            font=(DATA_FACE, 8),
         ).pack(fill="x", pady=(10, 0))
 
         action = self._station(3, "Inspect safely")
@@ -1038,11 +1038,13 @@ class LatticeApp:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Lattice local PNG steganography UI")
+    parser = argparse.ArgumentParser(
+        description="SIMP - Steganographic Image Messaging Protocol"
+    )
     parser.add_argument("--demo", action="store_true", help="load sample content for review")
     args = parser.parse_args(argv)
     root = tk.Tk()
-    LatticeApp(root, demo=args.demo)
+    SIMPApp(root, demo=args.demo)
     root.mainloop()
     return 0
 

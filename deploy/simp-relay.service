@@ -1,0 +1,27 @@
+[Unit]
+Description=SIMP stateless image-message relay
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=simp
+Group=simp
+WorkingDirectory=/opt/simp
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/opt/simp/.venv/bin/python -m simp relay --host 0.0.0.0 --port 45873
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateDevices=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_INET AF_INET6
+LockPersonality=true
+
+[Install]
+WantedBy=multi-user.target

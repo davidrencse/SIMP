@@ -8,18 +8,22 @@ No third-party dependencies: the PNG codec is implemented with the stdlib
 (zlib, struct).
 
 Usage:
-    python steg.py encode <image.png> <text> [-o output.png]
-    python steg.py encode <image.png> --file payload.bin [-o output.png]
-    python steg.py decode <image.png> [-o output.txt]
+    python -m simp codec encode <image.png> <text> [-o output.png]
+    python -m simp codec encode <image.png> --file payload.bin [-o output.png]
+    python -m simp codec decode <image.png> [-o output.txt]
 """
 
 import argparse
+from pathlib import Path
 import struct
 import sys
 import zlib
 
 SIGNATURE = b"\x89PNG\r\n\x1a\n"
 MAGIC = b"STEG"
+MAX_DECOMPRESSED_BYTES = 48 * 1024 * 1024
+MAX_PNG_BYTES = 64 * 1024 * 1024
+MAX_DIMENSION = 32768
 
 
 class StegError(Exception):
@@ -32,12 +36,30 @@ class StegError(Exception):
 
 def _iter_chunks(data):
     pos = 8
+    saw_iend = False
     while pos < len(data):
+        if len(data) - pos < 12:
+            raise StegError("malformed PNG: truncated chunk header")
         length = struct.unpack(">I", data[pos:pos + 4])[0]
+        chunk_end = pos + 12 + length
+        if chunk_end > len(data):
+            raise StegError("malformed PNG: truncated chunk data")
         ctype = data[pos + 4:pos + 8]
         cdata = data[pos + 8:pos + 8 + length]
+        expected_crc = struct.unpack(">I", data[pos + 8 + length:chunk_end])[0]
+        actual_crc = zlib.crc32(ctype + cdata) & 0xFFFFFFFF
+        if actual_crc != expected_crc:
+            name = ctype.decode("ascii", errors="replace")
+            raise StegError(f"malformed PNG: bad CRC in {name} chunk")
         yield ctype, cdata
-        pos += 12 + length
+        pos = chunk_end
+        if ctype == b"IEND":
+            saw_iend = True
+            if pos != len(data):
+                raise StegError("malformed PNG: data found after IEND")
+            break
+    if not saw_iend:
+        raise StegError("malformed PNG: missing IEND")
 
 
 def _paeth(a, b, c):
@@ -53,6 +75,8 @@ def _paeth(a, b, c):
 
 
 def _unfilter_scanline(filter_type, scan, prev, bpp):
+    if filter_type not in (0, 1, 2, 3, 4):
+        raise StegError(f"malformed PNG: unsupported filter type {filter_type}")
     out = bytearray(scan)
     for i in range(len(scan)):
         raw = out[i]
@@ -74,47 +98,84 @@ def _channels_for_color_type(color_type):
     return {0: 1, 2: 3, 3: 1, 4: 2, 6: 4}[color_type]
 
 
-def read_png(path):
-    """Return (width, height, channels, pixels).
+def read_png_bytes(data):
+    """Decode PNG bytes and return ``(width, height, channels, pixels)``.
 
     ``pixels`` is a ``bytearray`` of the raw image data in row-major order,
     ``channels`` bytes per pixel.
     """
-    with open(path, "rb") as fh:
-        data = fh.read()
-
     if not data.startswith(SIGNATURE):
         raise StegError("not a PNG file (bad signature)")
+    if len(data) > MAX_PNG_BYTES:
+        raise StegError("PNG exceeds the 64 MB input safety limit")
 
     width = height = bit_depth = color_type = None
     idat = bytearray()
+    saw_ihdr = False
+    saw_iend = False
 
     for ctype, cdata in _iter_chunks(data):
         if ctype == b"IHDR":
-            width, height, bit_depth, color_type = struct.unpack(
-                ">IIBB", cdata[:10]
-            )
+            if saw_ihdr or len(cdata) != 13:
+                raise StegError("malformed PNG: invalid IHDR")
+            (
+                width,
+                height,
+                bit_depth,
+                color_type,
+                compression,
+                filter_method,
+                interlace,
+            ) = struct.unpack(">IIBBBBB", cdata)
+            saw_ihdr = True
+            if compression != 0 or filter_method != 0:
+                raise StegError("unsupported PNG compression or filter method")
+            if interlace != 0:
+                raise StegError("interlaced PNGs are not supported")
         elif ctype == b"IDAT":
+            if not saw_ihdr:
+                raise StegError("malformed PNG: IDAT appears before IHDR")
             idat.extend(cdata)
         elif ctype == b"PLTE":
             raise StegError("paletted PNGs are not supported; convert to RGB first")
+        elif ctype == b"IEND":
+            saw_iend = True
 
-    if None in (width, height, bit_depth, color_type):
+    if not saw_ihdr or None in (width, height, bit_depth, color_type):
         raise StegError("malformed PNG: missing IHDR")
+    if not saw_iend or not idat:
+        raise StegError("malformed PNG: missing image data")
+    if width <= 0 or height <= 0 or width > MAX_DIMENSION or height > MAX_DIMENSION:
+        raise StegError(
+            f"unsupported PNG dimensions: maximum is {MAX_DIMENSION} x {MAX_DIMENSION}"
+        )
     if bit_depth != 8:
         raise StegError("only 8-bit PNGs are supported")
     if color_type not in (0, 2, 4, 6):
         raise StegError("unsupported color type; use grayscale, RGB, or RGBA")
 
     channels = _channels_for_color_type(color_type)
+    stride = width * channels
+    expected_size = height * (stride + 1)
+    if expected_size > MAX_DECOMPRESSED_BYTES:
+        raise StegError(
+            "PNG expands beyond the 48 MB decoded-image safety limit"
+        )
 
     try:
-        raw = zlib.decompress(bytes(idat))
+        decompressor = zlib.decompressobj()
+        raw = decompressor.decompress(bytes(idat), expected_size + 1)
+        if decompressor.unconsumed_tail or len(raw) > expected_size:
+            raise StegError("PNG expands beyond its declared dimensions")
+        raw += decompressor.flush()
     except zlib.error as exc:
         raise StegError("could not decompress image data") from exc
+    if decompressor.unused_data:
+        raise StegError("malformed PNG: trailing compressed image data")
+    if not decompressor.eof or len(raw) != expected_size:
+        raise StegError("malformed PNG: decompressed data size does not match IHDR")
 
     bpp = channels
-    stride = width * channels
     pixels = bytearray()
     prev = b"\x00" * stride
     pos = 0
@@ -132,6 +193,11 @@ def read_png(path):
     return width, height, channels, pixels
 
 
+def read_png(path):
+    """Read a PNG file and return ``(width, height, channels, pixels)``."""
+    return read_png_bytes(Path(path).read_bytes())
+
+
 # --------------------------------------------------------------------------
 # PNG encoding (write pixels back out as a PNG file)
 # --------------------------------------------------------------------------
@@ -142,7 +208,8 @@ def _chunk(ctype, cdata):
     return struct.pack(">I", len(cdata)) + chunk + struct.pack(">I", crc)
 
 
-def write_png(path, width, height, channels, pixels, color_type):
+def write_png_bytes(width, height, channels, pixels, color_type):
+    """Encode raw pixel bytes as a PNG and return the resulting bytes."""
     raw = bytearray()
     stride = width * channels
     for y in range(height):
@@ -155,8 +222,14 @@ def write_png(path, width, height, channels, pixels, color_type):
     out += _chunk(b"IDAT", zlib.compress(bytes(raw), 9))
     out += _chunk(b"IEND", b"")
 
-    with open(path, "wb") as fh:
-        fh.write(out)
+    return bytes(out)
+
+
+def write_png(path, width, height, channels, pixels, color_type):
+    """Encode raw pixel bytes and write them to ``path`` as a PNG."""
+    Path(path).write_bytes(
+        write_png_bytes(width, height, channels, pixels, color_type)
+    )
 
 
 # --------------------------------------------------------------------------
@@ -181,9 +254,9 @@ def _decode_payload(blob):
     return bytes(payload)
 
 
-def embed(cover_path, payload, output_path):
-    """Hide ``payload`` (bytes) inside ``cover_path``, writing to ``output_path``."""
-    width, height, channels, pixels = read_png(cover_path)
+def embed_bytes(cover_png, payload):
+    """Hide ``payload`` in PNG bytes and return a new encoded PNG."""
+    width, height, channels, pixels = read_png_bytes(cover_png)
     full = _encode_payload(payload)
 
     bits_needed = len(full) * 8
@@ -201,26 +274,49 @@ def embed(cover_path, payload, output_path):
             pixels[pixel_index] = (pixels[pixel_index] & 0xFE) | ((byte >> bit) & 1)
 
     color_type = {1: 0, 3: 2, 2: 4, 4: 6}[channels]
-    write_png(output_path, width, height, channels, pixels, color_type)
+    return write_png_bytes(width, height, channels, pixels, color_type)
 
 
-def extract(path):
-    """Recover and return the payload hidden inside ``path`` (as bytes)."""
-    _, _, _, pixels = read_png(path)
+def embed(cover_path, payload, output_path):
+    """Hide ``payload`` (bytes) inside ``cover_path``, writing to ``output_path``."""
+    encoded = embed_bytes(Path(cover_path).read_bytes(), payload)
+    Path(output_path).write_bytes(encoded)
+
+
+def extract_bytes(encoded_png):
+    """Recover and return the hidden payload from PNG bytes."""
+    _, _, _, pixels = read_png_bytes(encoded_png)
 
     header_bits = 8 * 8  # MAGIC + length field
     if len(pixels) < header_bits:
         raise StegError("image too small to contain hidden data")
 
-    blob = bytearray(len(pixels) // 8)
-    for i in range(len(blob)):
+    header = _extract_pixel_bytes(pixels, 0, 8)
+    if not header.startswith(MAGIC):
+        raise StegError("no hidden data found (bad magic)")
+    length = struct.unpack(">I", header[4:8])[0]
+    available = len(pixels) // 8 - 8
+    if length > available:
+        raise StegError("hidden data is truncated (image was modified?)")
+    payload = _extract_pixel_bytes(pixels, 8, length)
+    return _decode_payload(header + payload)
+
+
+def _extract_pixel_bytes(pixels, start_byte, byte_count):
+    """Extract a bounded byte range from pixel least-significant bits."""
+    blob = bytearray(byte_count)
+    for i in range(byte_count):
         byte = 0
         for bit in range(8):
-            pixel_index = i * 8 + bit
+            pixel_index = (start_byte + i) * 8 + bit
             byte |= (pixels[pixel_index] & 1) << bit
         blob[i] = byte
+    return bytes(blob)
 
-    return _decode_payload(bytes(blob))
+
+def extract(path):
+    """Recover and return the payload hidden inside ``path`` (as bytes)."""
+    return extract_bytes(Path(path).read_bytes())
 
 
 # --------------------------------------------------------------------------

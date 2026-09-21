@@ -1,200 +1,222 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-20T01:41:22Z",
-  "title": "Design System: Lattice",
+  "generatedAt": "2026-09-20T23:33:26Z",
+  "title": "Design System: SIMP",
   "extensions": {
     "colorMeta": {
-      "paper": {
+      "black": {
         "role": "neutral",
-        "displayName": "Matte Proof Paper",
-        "canonical": "#E7E6DD",
-        "tonalRamp": ["oklch(15% 0.012 101.5)", "oklch(27% 0.012 101.5)", "oklch(39% 0.012 101.5)", "oklch(51% 0.012 101.5)", "oklch(63% 0.012 101.5)", "oklch(75% 0.012 101.5)", "oklch(87% 0.012 101.5)", "oklch(95% 0.012 101.5)"]
-      },
-      "paper-light": {
-        "role": "neutral",
-        "displayName": "Light Bench Paper",
-        "canonical": "#F3F1E9",
-        "tonalRamp": ["oklch(15% 0.011 95.2)", "oklch(27% 0.011 95.2)", "oklch(39% 0.011 95.2)", "oklch(51% 0.011 95.2)", "oklch(63% 0.011 95.2)", "oklch(75% 0.011 95.2)", "oklch(87% 0.011 95.2)", "oklch(95% 0.011 95.2)"]
+        "displayName": "Darkroom Black",
+        "canonical": "#080808",
+        "tonalRamp": ["oklch(15% 0 0)", "oklch(27% 0 0)", "oklch(39% 0 0)", "oklch(51% 0 0)", "oklch(63% 0 0)", "oklch(75% 0 0)", "oklch(87% 0 0)", "oklch(95% 0 0)"]
       },
       "ink": {
         "role": "neutral",
-        "displayName": "Near-Black Ink",
+        "displayName": "Correspondence Ink",
+        "canonical": "#111111",
+        "tonalRamp": ["oklch(15% 0 0)", "oklch(27% 0 0)", "oklch(39% 0 0)", "oklch(51% 0 0)", "oklch(63% 0 0)", "oklch(75% 0 0)", "oklch(87% 0 0)", "oklch(95% 0 0)"]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "Reading White",
+        "canonical": "#F7F7F4",
+        "tonalRamp": ["oklch(15% 0.003 100)", "oklch(27% 0.003 100)", "oklch(39% 0.003 100)", "oklch(51% 0.003 100)", "oklch(63% 0.003 100)", "oklch(75% 0.003 100)", "oklch(87% 0.003 100)", "oklch(95% 0.003 100)"]
+      },
+      "composer-paper": {
+        "role": "neutral",
+        "displayName": "Composer Paper",
+        "canonical": "#ECECE8",
+        "tonalRamp": ["oklch(15% 0.004 100)", "oklch(27% 0.004 100)", "oklch(39% 0.004 100)", "oklch(51% 0.004 100)", "oklch(63% 0.004 100)", "oklch(75% 0.004 100)", "oklch(87% 0.004 100)", "oklch(95% 0.004 100)"]
+      },
+      "rule-light": {
+        "role": "neutral",
+        "displayName": "Light Rule",
+        "canonical": "#DDDDD8",
+        "tonalRamp": ["oklch(15% 0.006 100)", "oklch(27% 0.006 100)", "oklch(39% 0.006 100)", "oklch(51% 0.006 100)", "oklch(63% 0.006 100)", "oklch(75% 0.006 100)", "oklch(87% 0.006 100)", "oklch(95% 0.006 100)"]
+      },
+      "metadata": {
+        "role": "neutral",
+        "displayName": "Metadata Gray",
+        "canonical": "#8A8A84",
+        "tonalRamp": ["oklch(15% 0.006 100)", "oklch(27% 0.006 100)", "oklch(39% 0.006 100)", "oklch(51% 0.006 100)", "oklch(63% 0.006 100)", "oklch(75% 0.006 100)", "oklch(87% 0.006 100)", "oklch(95% 0.006 100)"]
+      },
+      "secondary-text": {
+        "role": "neutral",
+        "displayName": "Secondary Graphite",
+        "canonical": "#565652",
+        "tonalRamp": ["oklch(15% 0.005 100)", "oklch(27% 0.005 100)", "oklch(39% 0.005 100)", "oklch(51% 0.005 100)", "oklch(63% 0.005 100)", "oklch(75% 0.005 100)", "oklch(87% 0.005 100)", "oklch(95% 0.005 100)"]
+      },
+      "workbench-paper": {
+        "role": "neutral",
+        "displayName": "Workbench Proof Paper",
+        "canonical": "#E7E6DD",
+        "tonalRamp": ["oklch(15% 0.012 101.5)", "oklch(27% 0.012 101.5)", "oklch(39% 0.012 101.5)", "oklch(51% 0.012 101.5)", "oklch(63% 0.012 101.5)", "oklch(75% 0.012 101.5)", "oklch(87% 0.012 101.5)", "oklch(95% 0.012 101.5)"]
+      },
+      "workbench-paper-light": {
+        "role": "neutral",
+        "displayName": "Workbench Light Paper",
+        "canonical": "#F3F1E9",
+        "tonalRamp": ["oklch(15% 0.011 95.2)", "oklch(27% 0.011 95.2)", "oklch(39% 0.011 95.2)", "oklch(51% 0.011 95.2)", "oklch(63% 0.011 95.2)", "oklch(75% 0.011 95.2)", "oklch(87% 0.011 95.2)", "oklch(95% 0.011 95.2)"]
+      },
+      "workbench-ink": {
+        "role": "neutral",
+        "displayName": "Workbench Ink",
         "canonical": "#26241F",
         "tonalRamp": ["oklch(15% 0.010 88.8)", "oklch(27% 0.010 88.8)", "oklch(39% 0.010 88.8)", "oklch(51% 0.010 88.8)", "oklch(63% 0.010 88.8)", "oklch(75% 0.010 88.8)", "oklch(87% 0.010 88.8)", "oklch(95% 0.010 88.8)"]
       },
-      "muted-ink": {
+      "workbench-rule": {
         "role": "neutral",
-        "displayName": "Graphite Note",
-        "canonical": "#595750",
-        "tonalRamp": ["oklch(15% 0.011 93.7)", "oklch(27% 0.011 93.7)", "oklch(39% 0.011 93.7)", "oklch(51% 0.011 93.7)", "oklch(63% 0.011 93.7)", "oklch(75% 0.011 93.7)", "oklch(87% 0.011 93.7)", "oklch(95% 0.011 93.7)"]
-      },
-      "rule": {
-        "role": "neutral",
-        "displayName": "Pencil Rule",
+        "displayName": "Workbench Rule",
         "canonical": "#AAA89F",
         "tonalRamp": ["oklch(15% 0.013 96.5)", "oklch(27% 0.013 96.5)", "oklch(39% 0.013 96.5)", "oklch(51% 0.013 96.5)", "oklch(63% 0.013 96.5)", "oklch(75% 0.013 96.5)", "oklch(87% 0.013 96.5)", "oklch(95% 0.013 96.5)"]
       },
-      "sage": {
-        "role": "secondary",
-        "displayName": "Muted Sage",
-        "canonical": "#75877B",
-        "tonalRamp": ["oklch(15% 0.028 156.3)", "oklch(27% 0.028 156.3)", "oklch(39% 0.028 156.3)", "oklch(51% 0.028 156.3)", "oklch(63% 0.028 156.3)", "oklch(75% 0.028 156.3)", "oklch(87% 0.028 156.3)", "oklch(95% 0.028 156.3)"]
-      },
-      "sage-dark": {
-        "role": "secondary",
-        "displayName": "Local Sage",
-        "canonical": "#53685C",
-        "tonalRamp": ["oklch(15% 0.032 160.0)", "oklch(27% 0.032 160.0)", "oklch(39% 0.032 160.0)", "oklch(51% 0.032 160.0)", "oklch(63% 0.032 160.0)", "oklch(75% 0.032 160.0)", "oklch(87% 0.032 160.0)", "oklch(95% 0.032 160.0)"]
-      },
-      "brick": {
+      "workbench-brick": {
         "role": "primary",
         "displayName": "Proof Brick",
         "canonical": "#A74838",
         "tonalRamp": ["oklch(15% 0.129 31.5)", "oklch(27% 0.129 31.5)", "oklch(39% 0.129 31.5)", "oklch(51% 0.129 31.5)", "oklch(63% 0.129 31.5)", "oklch(75% 0.129 31.5)", "oklch(87% 0.129 31.5)", "oklch(95% 0.129 31.5)"]
       },
-      "brick-active": {
+      "workbench-brick-active": {
         "role": "primary",
         "displayName": "Pressed Brick",
         "canonical": "#8C382D",
         "tonalRamp": ["oklch(15% 0.117 29.8)", "oklch(27% 0.117 29.8)", "oklch(39% 0.117 29.8)", "oklch(51% 0.117 29.8)", "oklch(63% 0.117 29.8)", "oklch(75% 0.117 29.8)", "oklch(87% 0.117 29.8)", "oklch(95% 0.117 29.8)"]
       },
-      "field-white": {
-        "role": "neutral",
-        "displayName": "Field White",
-        "canonical": "#FBFAF5",
-        "tonalRamp": ["oklch(15% 0.007 97.3)", "oklch(27% 0.007 97.3)", "oklch(39% 0.007 97.3)", "oklch(51% 0.007 97.3)", "oklch(63% 0.007 97.3)", "oklch(75% 0.007 97.3)", "oklch(87% 0.007 97.3)", "oklch(95% 0.007 97.3)"]
+      "workbench-sage": {
+        "role": "secondary",
+        "displayName": "Muted Sage",
+        "canonical": "#75877B",
+        "tonalRamp": ["oklch(15% 0.028 156.3)", "oklch(27% 0.028 156.3)", "oklch(39% 0.028 156.3)", "oklch(51% 0.028 156.3)", "oklch(63% 0.028 156.3)", "oklch(75% 0.028 156.3)", "oklch(87% 0.028 156.3)", "oklch(95% 0.028 156.3)"]
       },
-      "error": {
-        "role": "primary",
+      "workbench-error": {
+        "role": "tertiary",
         "displayName": "Error Oxide",
         "canonical": "#8E2F2A",
         "tonalRamp": ["oklch(15% 0.130 26.7)", "oklch(27% 0.130 26.7)", "oklch(39% 0.130 26.7)", "oklch(51% 0.130 26.7)", "oklch(63% 0.130 26.7)", "oklch(75% 0.130 26.7)", "oklch(87% 0.130 26.7)", "oklch(95% 0.130 26.7)"]
-      },
-      "preview-placeholder": {
-        "role": "neutral",
-        "displayName": "Empty Proof Gray",
-        "canonical": "#D8D8D0",
-        "tonalRamp": ["oklch(15% 0.011 106.6)", "oklch(27% 0.011 106.6)", "oklch(39% 0.011 106.6)", "oklch(51% 0.011 106.6)", "oklch(63% 0.011 106.6)", "oklch(75% 0.011 106.6)", "oklch(87% 0.011 106.6)", "oklch(95% 0.011 106.6)"]
-      },
-      "secondary-active": {
-        "role": "neutral",
-        "displayName": "Pressed Paper",
-        "canonical": "#D8D6CD",
-        "tonalRamp": ["oklch(15% 0.012 96.4)", "oklch(27% 0.012 96.4)", "oklch(39% 0.012 96.4)", "oklch(51% 0.012 96.4)", "oklch(63% 0.012 96.4)", "oklch(75% 0.012 96.4)", "oklch(87% 0.012 96.4)", "oklch(95% 0.012 96.4)"]
-      },
-      "capacity-track": {
-        "role": "neutral",
-        "displayName": "Capacity Track",
-        "canonical": "#D0CEC5",
-        "tonalRamp": ["oklch(15% 0.012 96.4)", "oklch(27% 0.012 96.4)", "oklch(39% 0.012 96.4)", "oklch(51% 0.012 96.4)", "oklch(63% 0.012 96.4)", "oklch(75% 0.012 96.4)", "oklch(87% 0.012 96.4)", "oklch(95% 0.012 96.4)"]
       }
     },
     "typographyMeta": {
-      "display": {"displayName": "Lattice Display", "purpose": "The application wordmark only."},
-      "station-title": {"displayName": "Station Title", "purpose": "Names each stage of the processing bench."},
-      "action": {"displayName": "Primary Action", "purpose": "Decisive create and recover controls."},
-      "body": {"displayName": "Native Body", "purpose": "Input content and supporting explanations."},
-      "carrier-label": {"displayName": "Carrier Label", "purpose": "Labels the artifact directly above the proof."},
-      "data": {"displayName": "Operational Data", "purpose": "Modes, filenames, measurements, captions, and safety assurances."},
-      "annotation": {"displayName": "Proof Annotation", "purpose": "Carrier facts and suitability notes in the proof margin only."}
+      "brand": {"displayName": "Messenger Brand", "purpose": "The SIMP mark in the connection rail."},
+      "room-title": {"displayName": "Room Title", "purpose": "The connected room and local identity."},
+      "empty-title": {"displayName": "Empty Transcript Title", "purpose": "The first-run statement before any room events."},
+      "body": {"displayName": "Conversation Body", "purpose": "Decoded speech, empty-state explanation, and composer input."},
+      "field": {"displayName": "Setup Value", "purpose": "Name, room, relay, and port values in the connection rail."},
+      "label": {"displayName": "Control Label", "purpose": "Buttons, sender names, and compact field labels."},
+      "data": {"displayName": "Protocol Data", "purpose": "Carrier facts, timestamps, image sizes, and reveal captions."},
+      "workbench-display": {"displayName": "Workbench Display", "purpose": "The secondary workbench wordmark only."},
+      "workbench-annotation": {"displayName": "Workbench Annotation", "purpose": "Carrier measurements and suitability beside the proof only."}
     },
     "shadows": [],
     "motion": [],
     "breakpoints": [
-      {"name": "compact-docket", "value": "1320px"},
-      {"name": "minimum-window", "value": "1200px × 800px"}
+      {"name": "messenger-minimum-window", "value": "880px x 620px"},
+      {"name": "workbench-compact-docket", "value": "1320px"},
+      {"name": "workbench-minimum-window", "value": "1050px x 700px"}
     ]
   },
   "components": [
     {
-      "name": "Hide / Recover Switch",
+      "name": "Connection Rail",
       "kind": "nav",
-      "refersTo": "mode-selected",
-      "description": "A static HTML preview of the native two-button mode selector; selection is represented by the brick-filled button.",
-      "html": "<div class=\"ds-mode-switch\" role=\"group\" aria-label=\"Processing mode\"><button class=\"ds-mode-button ds-mode-button-selected\" aria-pressed=\"true\">Hide</button><button class=\"ds-mode-button\" aria-pressed=\"false\">Recover</button></div>",
-      "css": ".ds-mode-switch{display:grid;grid-template-columns:1fr 1fr;background:#AAA89F;padding:1px;width:330px}.ds-mode-button{border:0;border-radius:0;background:#F3F1E9;color:#26241F;padding:14px 15px;font:400 12px Consolas,monospace;cursor:pointer}.ds-mode-button-selected{background:#A74838;color:#FBFAF5}.ds-mode-button:active{background:#D8D6CD}.ds-mode-button-selected:active{background:#8C382D}.ds-mode-button:focus-visible{outline:1px solid #26241F;outline-offset:0}"
+      "description": "The fixed dark setup column that anchors messenger identity, connection, carrier, and safety information.",
+      "html": "<aside class=\"ds-connection-rail\"><div class=\"ds-rail-brand\">SIMP</div><div class=\"ds-rail-kicker\">STEGANOGRAPHIC<br>MESSAGING PROTOCOL</div><div class=\"ds-rail-status\">Every application message is a PNG.</div></aside>",
+      "css": ".ds-connection-rail{box-sizing:border-box;width:310px;min-height:520px;background:#080808;color:#F7F7F4;padding:26px 28px;font-family:'Segoe UI',sans-serif}.ds-rail-brand{font-family:'Libre Caslon Text','Book Antiqua',serif;font-size:39px;line-height:1}.ds-rail-kicker{margin-top:10px;color:#8A8A84;font:12px/1.35 Consolas,monospace}.ds-rail-status{margin-top:300px;padding-top:17px;border-top:1px solid #565652;color:#8A8A84;font-size:12px;line-height:1.45}"
     },
     {
-      "name": "Primary Processing Action",
-      "kind": "button",
-      "refersTo": "button-primary",
-      "description": "The native create or recover action translated into a self-contained preview, including its four-square registration stamp.",
-      "html": "<button class=\"ds-primary-action\"><span class=\"ds-primary-stamp\" aria-hidden=\"true\"><i></i><i></i><i></i><i></i></span>Create encoded PNG</button>",
-      "css": ".ds-primary-action{display:flex;align-items:center;justify-content:center;gap:16px;width:100%;border:1px solid #A74838;border-radius:0;background:#A74838;color:#FBFAF5;padding:32px 15px;font:400 17px 'Libre Caslon Text','Book Antiqua',serif;cursor:pointer}.ds-primary-action:active{background:#8C382D}.ds-primary-action:focus-visible{outline:1px solid #26241F;outline-offset:0}.ds-primary-stamp{display:grid;grid-template-columns:6px 6px;grid-template-rows:6px 6px;gap:2px}.ds-primary-stamp i{display:block;background:#FBFAF5}"
-    },
-    {
-      "name": "Secondary Button",
-      "kind": "button",
-      "refersTo": "button-secondary",
-      "description": "The flat native chooser control used for files and output destinations.",
-      "html": "<button class=\"ds-secondary-button\">Choose output…</button>",
-      "css": ".ds-secondary-button{border:1px solid #AAA89F;border-radius:0;background:#F3F1E9;color:#26241F;padding:6px 15px;font:400 12px Consolas,monospace;cursor:pointer}.ds-secondary-button:active{background:#D8D6CD}.ds-secondary-button:focus-visible{outline:1px solid #26241F;outline-offset:0}"
-    },
-    {
-      "name": "Payload Text Field",
+      "name": "Dark Field",
       "kind": "input",
-      "refersTo": "text-field",
-      "description": "The square native text surface used for UTF-8 payload entry.",
-      "html": "<textarea class=\"ds-payload-field\" rows=\"4\">Meet at the north trailhead at 7. Bring the maps.</textarea>",
-      "css": ".ds-payload-field{display:block;width:100%;min-height:92px;box-sizing:border-box;resize:none;border:1px solid #AAA89F;border-radius:0;background:#FBFAF5;color:#26241F;padding:4px;font:400 12px 'Segoe UI',sans-serif}.ds-payload-field:focus-visible{outline:1px solid #A74838;outline-offset:0}"
+      "refersTo": "dark-field",
+      "description": "A connection value field on the black rail.",
+      "html": "<label class=\"ds-dark-field-wrap\">Your name<input class=\"ds-dark-field\" value=\"Alice\"></label>",
+      "css": ".ds-dark-field-wrap{display:grid;gap:5px;width:254px;color:#8A8A84;font:600 11px 'Segoe UI',sans-serif}.ds-dark-field{box-sizing:border-box;width:100%;background:#080808;color:#F7F7F4;border:1px solid #565652;border-radius:0;padding:8px 0;font:13px 'Segoe UI',sans-serif;outline:none}.ds-dark-field:hover{border-color:#8A8A84}.ds-dark-field:focus-visible{border-color:#F7F7F4;outline:1px solid #F7F7F4;outline-offset:1px}"
     },
     {
-      "name": "Processing Station",
-      "kind": "card",
-      "refersTo": "station",
-      "description": "A representative flat bench station with its line icon, editorial heading, rule, and operational content.",
-      "html": "<section class=\"ds-station\"><header class=\"ds-station-heading\"><svg viewBox=\"0 0 20 20\" aria-hidden=\"true\"><path d=\"M4 2.5h8l4 4V18H4zM12 2.5v4h4\"/></svg><span>Output</span></header><div class=\"ds-station-rule\"></div><div class=\"ds-station-field\">lattice_encoded.png</div><p>The source image stays unchanged.</p></section>",
-      "css": ".ds-station{box-sizing:border-box;border:1px solid #AAA89F;border-radius:0;background:#F3F1E9;color:#26241F;padding:17px 20px;width:330px}.ds-station-heading{display:flex;align-items:center;gap:8px;font:400 18px 'Libre Caslon Text','Book Antiqua',serif}.ds-station-heading svg{width:20px;height:20px;fill:none;stroke:#26241F;stroke-width:1}.ds-station-rule{height:1px;background:#AAA89F;margin:8px 0 12px}.ds-station-field{border:1px solid #AAA89F;background:#FBFAF5;padding:8px 4px;font:400 12px 'Segoe UI',sans-serif}.ds-station p{margin:10px 0 0;color:#595750;font:400 11px Consolas,monospace}"
+      "name": "Connection Button",
+      "kind": "button",
+      "refersTo": "button-connection",
+      "description": "The high-contrast connect or disconnect action in the rail.",
+      "html": "<button class=\"ds-connect-button\">Connect</button>",
+      "css": ".ds-connect-button{width:254px;background:#F7F7F4;color:#080808;border:1px solid #F7F7F4;border-radius:0;padding:12px 13px;font:600 12px 'Segoe UI',sans-serif}.ds-connect-button:hover{background:#DDDDD8}.ds-connect-button:active{background:#8A8A84}.ds-connect-button:focus-visible{outline:2px solid #F7F7F4;outline-offset:3px}"
     },
     {
-      "name": "Capacity Meter",
+      "name": "Conversation Header",
       "kind": "custom",
-      "refersTo": "station",
-      "description": "A text-redundant native capacity indicator; sage means the payload fits and oxide is reserved for overflow.",
-      "html": "<div class=\"ds-capacity\"><div class=\"ds-capacity-track\" role=\"meter\" aria-valuemin=\"0\" aria-valuemax=\"255400\" aria-valuenow=\"49\"><span></span></div><p>49 B of 255.4 KB (0.02%)</p><dl><div><dt>Estimated capacity</dt><dd>255.4 KB</dd></div><div><dt>Remaining space</dt><dd>255.3 KB</dd></div><div><dt>Suitable</dt><dd>Yes — fits this carrier</dd></div></dl></div>",
-      "css": ".ds-capacity{width:330px;color:#595750;font:400 12px 'Segoe UI',sans-serif}.ds-capacity-track{height:18px;background:#D0CEC5}.ds-capacity-track span{display:block;width:4px;height:100%;background:#75877B}.ds-capacity p{margin:10px 0 26px}.ds-capacity dl{margin:0}.ds-capacity dl div{display:flex;gap:8px}.ds-capacity dt,.ds-capacity dd{margin:0}.ds-capacity dd{color:#26241F}"
+      "description": "The room identity, participant state, and compact protocol legend above the transcript.",
+      "html": "<header class=\"ds-room-header\"><div><div class=\"ds-room-title\">first-room / Alice</div><div class=\"ds-room-status\">2 participants · image transport active</div></div><div class=\"ds-room-legend\">PNG IN / TEXT OUT</div></header>",
+      "css": ".ds-room-header{box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;width:760px;height:108px;padding:18px 36px 12px;background:#F7F7F4;color:#111111;border-bottom:1px solid #DDDDD8}.ds-room-title{font:30px 'Libre Caslon Text','Book Antiqua',serif}.ds-room-status{margin-top:4px;color:#565652;font:12px 'Segoe UI',sans-serif}.ds-room-legend{color:#565652;font:12px Consolas,monospace}"
     },
     {
-      "name": "Carrier Proof Frame",
+      "name": "Image Message",
       "kind": "custom",
-      "refersTo": "proof-frame",
-      "description": "The square-edged focusable proof field and handwritten metadata rail, represented without an external image dependency.",
-      "html": "<div class=\"ds-proof-wrap\"><button class=\"ds-proof\" aria-label=\"Choose carrier PNG\"><span class=\"ds-proof-label\">CARRIER PROOF</span><i class=\"ds-crop ds-crop-tl\"></i><i class=\"ds-crop ds-crop-tr\"></i><i class=\"ds-crop ds-crop-bl\"></i><i class=\"ds-crop ds-crop-br\"></i></button><aside class=\"ds-proof-meta\">1336 × 522<br>PNG<br>RGB<br><br>Capacity<br>255.4 KB<br><br><br>Suitable<br>carrier.</aside></div>",
-      "css": ".ds-proof-wrap{display:grid;grid-template-columns:minmax(420px,1fr) 76px;gap:14px;padding:14px;background:#E7E6DD}.ds-proof{position:relative;min-height:260px;border:2px solid #AAA89F;border-radius:0;background:#D8D8D0;color:#595750;font:400 12px Consolas,monospace;cursor:pointer}.ds-proof:focus-visible{outline:2px solid #A74838;outline-offset:0}.ds-proof-label{letter-spacing:.12em}.ds-crop{position:absolute;width:28px;height:28px}.ds-crop:before,.ds-crop:after{content:'';position:absolute;background:#26241F}.ds-crop:before{width:28px;height:1px}.ds-crop:after{width:1px;height:28px}.ds-crop-tl{left:9px;top:9px}.ds-crop-tr{right:9px;top:9px;transform:rotate(90deg)}.ds-crop-bl{left:9px;bottom:9px;transform:rotate(270deg)}.ds-crop-br{right:9px;bottom:9px;transform:rotate(180deg)}.ds-proof-meta{text-align:right;color:#595750;font:400 14px 'Segoe Print',cursive}"
+      "refersTo": "proof-tile",
+      "description": "A human message whose text can be revealed while remaining visibly attached to the PNG that carried it.",
+      "html": "<article class=\"ds-message\"><div class=\"ds-proof\"><div class=\"ds-proof-image\"></div><div class=\"ds-proof-meta\">PNG&nbsp;&nbsp;936.8 KB</div></div><div class=\"ds-message-copy\"><div class=\"ds-message-meta\"><strong>Bob</strong><time>19:25</time></div><button>Reveal</button><small>Show decoded text</small></div></article>",
+      "css": ".ds-message{display:flex;gap:20px;width:720px;background:#F7F7F4;color:#111111;font-family:'Segoe UI',sans-serif}.ds-proof{flex:0 0 126px;height:94px;background:#111111;color:#F7F7F4}.ds-proof-image{height:72px;background:#8A8A84}.ds-proof-meta{padding:5px 7px;font:11px Consolas,monospace}.ds-message-copy{flex:1}.ds-message-meta{display:flex;justify-content:space-between;font-size:12px}.ds-message-meta time,.ds-message-copy small{color:#8A8A84;font:11px Consolas,monospace}.ds-message-copy p{margin:14px 0 10px;font-size:15px;line-height:1.4}.ds-message:hover .ds-proof{outline:1px solid #565652}.ds-message:focus-within{outline:1px solid #111111;outline-offset:4px}"
+    },
+    {
+      "name": "System Event",
+      "kind": "custom",
+      "description": "A quiet join or leave record carried by a compact PNG thumbnail.",
+      "html": "<div class=\"ds-system-event\"><div class=\"ds-event-thumb\"></div><div class=\"ds-event-rule\"></div><span>Bob joined the room.</span><time>19:25</time></div>",
+      "css": ".ds-system-event{display:flex;align-items:center;gap:14px;width:720px;color:#565652;background:#F7F7F4;font:12px 'Segoe UI',sans-serif}.ds-event-thumb{width:42px;height:30px;background:#8A8A84}.ds-event-rule{height:1px;flex:1;background:#DDDDD8}.ds-system-event time{margin-left:auto;color:#8A8A84;font:12px Consolas,monospace}.ds-system-event:hover .ds-event-rule{background:#8A8A84}.ds-system-event:focus-within{outline:1px solid #111111;outline-offset:4px}"
+    },
+    {
+      "name": "Message Composer",
+      "kind": "input",
+      "refersTo": "composer",
+      "description": "The persistent bottom composer with explicit image-send action and carrier-capacity evidence.",
+      "html": "<form class=\"ds-composer\"><textarea class=\"ds-compose-input\" aria-label=\"Message\"></textarea><div class=\"ds-compose-action\"><button>Send as image</button><small>0 B text / 154.5 KB carrier</small></div></form>",
+      "css": ".ds-composer{box-sizing:border-box;display:flex;gap:14px;width:760px;background:#ECECE8;padding:20px 26px}.ds-compose-input{box-sizing:border-box;min-height:84px;flex:1;resize:none;background:#F7F7F4;color:#111111;border:1px solid #111111;border-radius:0;padding:11px 14px;font:15px 'Segoe UI',sans-serif}.ds-compose-input:focus-visible{outline:2px solid #111111;outline-offset:2px}.ds-compose-action{display:flex;flex-direction:column;width:150px;gap:9px}.ds-compose-action button{background:#111111;color:#F7F7F4;border:1px solid #111111;border-radius:0;padding:16px 13px;font:600 12px 'Segoe UI',sans-serif}.ds-compose-action button:hover{background:#565652}.ds-compose-action button:active{background:#080808}.ds-compose-action button:focus-visible{outline:2px solid #111111;outline-offset:2px}.ds-compose-action small{text-align:right;color:#565652;font:10px Consolas,monospace}"
+    },
+    {
+      "name": "Workbench Mode Switch",
+      "kind": "nav",
+      "description": "The secondary workbench's brick-selected Hide / Recover control.",
+      "html": "<div class=\"ds-workbench-switch\" role=\"group\" aria-label=\"Processing mode\"><button class=\"ds-workbench-selected\" aria-pressed=\"true\">Hide</button><button aria-pressed=\"false\">Recover</button></div>",
+      "css": ".ds-workbench-switch{display:grid;grid-template-columns:1fr 1fr;width:330px;background:#AAA89F;padding:1px}.ds-workbench-switch button{border:0;border-radius:0;background:#F3F1E9;color:#26241F;padding:8px 15px;font:12px Consolas,monospace}.ds-workbench-switch .ds-workbench-selected{background:#A74838;color:#F7F7F4}.ds-workbench-switch button:hover{outline:1px solid #26241F;outline-offset:-2px}.ds-workbench-switch button:active{background:#8C382D;color:#F7F7F4}.ds-workbench-switch button:focus-visible{outline:2px solid #26241F;outline-offset:2px}"
+    },
+    {
+      "name": "Workbench Capacity Meter",
+      "kind": "custom",
+      "description": "The secondary workbench's explicit capacity rail and textual fit verdict.",
+      "html": "<div class=\"ds-capacity\"><div class=\"ds-capacity-track\"><div class=\"ds-capacity-fill\"></div></div><div class=\"ds-capacity-copy\">42 B of 154.5 KB<br>Suitable&nbsp;&nbsp;Yes — fits this carrier</div></div>",
+      "css": ".ds-capacity{width:330px;background:#F3F1E9;color:#26241F;padding:17px 20px;font:12px 'Segoe UI',sans-serif}.ds-capacity-track{height:18px;background:#D0CEC5}.ds-capacity-fill{width:38%;height:100%;background:#75877B}.ds-capacity-copy{margin-top:12px;line-height:1.55}.ds-capacity:hover{outline:1px solid #AAA89F}.ds-capacity:focus-within{outline:2px solid #A74838;outline-offset:2px}"
     }
   ],
   "narrative": {
-    "northStar": "The Photographic Proofing Bench",
-    "overview": "Lattice presents local steganography as careful photographic handling. The carrier image is the artifact under inspection, given most of the window and surrounded by the familiar evidence of a proofing bench: matte stock, hairline rules, crop marks, measurement notes, and a restrained caption rail.\n\nThe interface is calm, exact, and visibly local. Editorial type gives the tool a human title and decisive actions; monospaced copy carries file facts and safety assurances; handwritten annotations make the carrier metadata feel observed rather than instrument-panel dense. The system rejects hacker-console theatrics and generic stacked-file-form composition while preserving obvious native controls, visible focus, and direct keyboard operation.",
+    "northStar": "The Darkroom Correspondence Desk",
+    "overview": "SIMP's primary visual world turns an unusual protocol into an ordinary, legible act of correspondence. A dense black connection rail holds setup and boundary information; an off-white reading room gives the decoded conversation space. Every message retains visible image evidence, so the protocol is explained by the composition itself instead of decorative networking imagery.\n\nThe system is editorial, exact, and deliberately quiet. Serif type names the product and place, sans-serif type carries human speech, and monospace reports the image and wire facts. The original Hide/Recover workbench remains a secondary photographic dialect: warmer paper, brick actions, sage capacity marks, and handwritten proof annotations belong there, not in the messenger.",
     "keyCharacteristics": [
-      "The carrier photograph remains visually dominant.",
-      "Warm matte paper and near-black ink establish the default visual field.",
-      "Brick red is reserved for the selected mode and primary action.",
-      "Sage marks safe local status and usable capacity.",
-      "Hairlines, crop marks, captions, and measurements organize the interface without elevation.",
-      "Wide layouts use one horizontal processing bench; compact layouts turn that bench into a vertical docket beside the proof."
+      "A black setup rail and light reading room create the messenger's defining split.",
+      "Every decoded message is visibly paired with its PNG proof tile.",
+      "Square controls, one-pixel rules, and tonal blocks replace elevation.",
+      "Serif establishes identity, sans-serif carries conversation, and monospace reports protocol facts.",
+      "The workbench keeps its warm proof-paper system as an intentional secondary dialect.",
+      "Native keyboard and focus behavior remain visible and understandable."
     ],
     "rules": [
-      {"name": "The One Red Action Rule", "body": "Proof Brick identifies the current choice or the next decisive action; it does not decorate headings, rules, metadata, or the photograph.", "section": "colors"},
-      {"name": "The Paper, Not Chrome Rule", "body": "Large regions stay within the two paper neutrals. Structure comes from ink, spacing, and hairlines rather than tinted panels.", "section": "colors"},
-      {"name": "The Three Voices Rule", "body": "Serif names and commits, monospace reports and assures, sans-serif supports input; handwriting belongs only beside the carrier proof.", "section": "typography"},
-      {"name": "The Proof Leads Rule", "body": "New layouts may change the bench flow, but they must not demote the carrier to a thumbnail or let controls become the largest visual object.", "section": "layout"},
-      {"name": "The Flat Proof Rule", "body": "Do not introduce drop shadows, floating cards, glass effects, or simulated elevation; use a paper change or a one-pixel rule when a boundary is necessary.", "section": "elevation"},
-      {"name": "The Cut-Paper Rule", "body": "Keep component silhouettes rectangular and crisp. Rounded cards, pills, and capsule toggles are outside this system.", "section": "shapes"}
+      {"name": "The Two Rooms Rule", "body": "Messenger setup lives on Darkroom Black and conversation lives on Reading White; do not blur the split with intermediate cards or tinted dashboards.", "section": "colors"},
+      {"name": "The Workbench Color Boundary Rule", "body": "Brick and sage communicate processing state in `simp/workbench.py`; they do not become messenger accents.", "section": "colors"},
+      {"name": "The Three Voices Rule", "body": "Serif names, sans-serif speaks, and monospace proves; do not use monospace for decoded conversation or serif for dense setup copy.", "section": "typography"},
+      {"name": "The Evidence Travels With the Text Rule", "body": "A conversation record may mirror by sender, but its proof tile, sender, time, reveal action, and revealed copy stay together.", "section": "layout"},
+      {"name": "The Flat Correspondence Rule", "body": "Do not introduce shadows, floating cards, translucency, or glass effects; change tone or draw one crisp rule when a boundary is necessary.", "section": "elevation"},
+      {"name": "The Unmasked Image Rule", "body": "A carrier is evidence, not an avatar: keep its rectangular silhouette and show its PNG size directly beneath or beside it.", "section": "shapes"}
     ],
     "dos": [
-      "Do preserve the carrier image as the dominant visual artifact in both wide and compact compositions.",
-      "Do reserve Proof Brick for selection, editable focus, and the primary processing action.",
-      "Do pair every capacity or status color with explicit text.",
-      "Do keep keyboard focus visible and preserve Alt+H, Alt+R, Ctrl+O, and Ctrl+Enter operation.",
-      "Do use paper tones, rules, crop marks, captions, and measurement notes to express the photographic proofing world."
+      "Do keep revealed message text attached to the PNG that carried it.",
+      "Do keep connection setup in the black rail and conversation in the light room.",
+      "Do use monospace for image, capacity, timestamp, and protocol evidence.",
+      "Do preserve visible focus and Ctrl+K, Ctrl+O, and Ctrl+Enter operation in the messenger.",
+      "Do keep the warm proof-paper, brick, sage, crop-mark, and handwritten language confined to the secondary workbench.",
+      "Do pair every status color or indicator with explicit text."
     ],
     "donts": [
-      "Don't introduce terminal green, neon cyber styling, scan-line effects, or hacker-console language.",
-      "Don't add shadows, rounded cards, pill controls, gradients, or decorative glass effects.",
-      "Don't spread brick red across headings, borders, metadata, or passive decoration.",
-      "Don't use handwriting anywhere except the proof's measurement and suitability notes.",
-      "Don't shrink the carrier into a token thumbnail when the window narrows; reflow the bench into the vertical docket."
+      "Don't render revealed messages as detached chat bubbles or hide the carrier evidence.",
+      "Don't add terminal green, neon cyber styling, scan lines, gradients, glass, shadows, rounded cards, or pill controls.",
+      "Don't use people avatars; the image carrier is the record's visual identity.",
+      "Don't use Proof Brick or Muted Sage as messenger decoration.",
+      "Don't imply encryption, relay blindness, identity verification, delivery guarantees, or persistent history.",
+      "Don't collapse the Hide/Recover workbench into the conversation composer; keep the two task models distinct."
     ]
   }
 }

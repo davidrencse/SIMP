@@ -1,6 +1,6 @@
 {
   "regions": [
-    {"id": "app-title", "kind": "text", "grid": "A0:B0", "note": "Lattice wordmark"},
+    {"id": "app-title", "kind": "text", "grid": "A0:B0", "note": "SIMP wordmark"},
     {"id": "app-subtitle", "kind": "text", "grid": "B0:D0", "note": "product description and local-only line"},
     {"id": "mode-switch", "kind": "control", "grid": "E0:F0", "note": "Hide and Recover segmented control"},
     {"id": "local-status", "kind": "text", "grid": "I0:J0", "note": "local-only reassurance"},

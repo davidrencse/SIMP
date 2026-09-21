@@ -1,152 +1,185 @@
 <div align="center">
 
-# Lattice
+# SIMP
 
-### Hide data in plain sight.
+### Steganographic Image Messaging Protocol
 
-A local, dependency-free PNG steganography workbench for embedding and recovering text or files.
+A dependency-free, multi-client messaging protocol where every application
+event travels inside a steganographic PNG.
 
-[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3d5a4f?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
-![Standard library only](https://img.shields.io/badge/dependencies-standard_library_only-a74838?style=flat-square)
-![Local processing](https://img.shields.io/badge/processing-100%25_local-6d6b64?style=flat-square)
+![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat-square&logo=python&logoColor=white)
+![Runtime dependencies](https://img.shields.io/badge/runtime_dependencies-none-53685C?style=flat-square)
+![Processing](https://img.shields.io/badge/processing-local_only-A74838?style=flat-square)
 
-<img src="docs/assets/lattice-hero.png" alt="A mountain landscape dissolving into a lattice of pixels and data points" width="100%">
+<img src="docs/assets/simp-hero.png" alt="SIMP steganography artwork" width="100%">
 
 </div>
 
-Lattice changes only the least-significant bits of a lossless PNG's pixel data. The image still looks like the image; the payload stays underneath, ready to be recovered by Lattice.
+SIMP hides text or file data in the least-significant bits of an 8-bit PNG.
+The resulting carrier remains a valid, visually similar PNG that SIMP can later
+decode. Its messenger uses those encoded images as the application protocol:
+every join, message, and leave event travels as a PNG.
 
 > [!IMPORTANT]
-> Lattice embeds and extracts bytes—it does **not** execute recovered content or turn an image into an executable. Steganography is also not encryption; encrypt sensitive data before embedding it.
+> SIMP embeds and extracts inert bytes. It never executes recovered content and
+> does not turn an image into an executable. Steganography conceals data but does
+> not encrypt it; encrypt sensitive data before embedding it.
 
-## The workbench
+## Features
 
-<img src="docs/assets/lattice-app.png" alt="Lattice desktop app showing a mountain carrier image, payload editor, capacity meter, and output controls" width="100%">
-
-The desktop interface keeps the whole workflow visible: choose a carrier, add text or a file, check whether it fits, and create a new encoded PNG. Switch to **Recover** to inspect a compatible image and save the hidden bytes safely.
-
-## Highlights
-
-- **Local by design** — files never leave your machine.
-- **Two ways to work** — a polished Tkinter desktop app and a scriptable CLI.
-- **Text or any file** — payloads are handled as raw bytes.
-- **Capacity feedback** — know whether a payload fits before writing anything.
-- **Source-safe output** — the desktop app requires a new output path.
-- **Zero package installs** — the PNG codec and steganography pipeline use only Python's standard library.
+- Image-first chat client with isolated rooms, on-request text reveal, and a lightweight relay.
+- Two-client setup by default, with multi-client rooms supported by the same protocol.
+- Optional local utility for manually hiding and recovering text or files.
+- Standard-library PNG codec and least-significant-bit embedding engine.
+- Capacity validation before data is written.
+- Versioned `SIMP/1` message envelopes with legacy `LATTICE-WIRE/1` decoding.
+- No telemetry, uploads, third-party runtime packages, or automatic execution.
 
 ## Quick start
 
-You need **Python 3.10 or newer** with Tkinter available.
+Requirements: Python 3.10 or newer with Tkinter.
+
+Launch the messenger:
 
 ```bash
-python app.py
+python -m simp
 ```
 
-On Windows, you can also double-click `lattice.bat`.
+On Windows, double-click `simp.bat`. `simp-messenger.bat` is an equivalent
+explicit launcher.
 
-Want to open the interface with the included landscape and example message already loaded?
+The manual Hide/Recover utility is separate from the messaging app:
 
 ```bash
-python app.py --demo
+python -m simp workbench
 ```
 
-### Keyboard shortcuts
+## Messenger setup
 
-| Shortcut | Action |
-| --- | --- |
-| `Alt+H` | Switch to Hide |
-| `Alt+R` | Switch to Recover |
-| `Ctrl+O` | Choose a carrier or encoded PNG |
-| `Ctrl+Enter` | Run the current action |
+1. Open the messenger and enter a display name and room.
+2. Enable **Start relay on this computer**, then select **Connect**.
+3. Open another messenger instance.
+4. Connect with a different name, the same room, and the same relay address.
+5. Type a message and select **Send as image**.
+6. Messages appear as PNG previews; select **Reveal** beside one to show its text.
 
-## Command line
-
-Hide a message:
+For clients on different computers, run a relay on a reachable host:
 
 ```bash
-python steg.py encode carrier.png "Meet at the north trailhead." -o encoded.png
+python -m simp relay --host 0.0.0.0 --port 45873
 ```
 
-Hide a file:
+Then use that host's LAN address and port in each client. Do not expose this
+learning prototype directly to the public internet: it intentionally has no
+encryption, identity authentication, persistent history, or production-grade
+abuse protection.
+
+For an Oracle Linux or Ubuntu VM, use the hardened `systemd` template and setup
+notes in [`docs/oracle-server.md`](docs/oracle-server.md). The relay stores no
+message history; envelopes expire after 24 hours and lifetimes are capped at
+seven days.
+
+## Codec CLI
+
+Hide and recover text:
 
 ```bash
-python steg.py encode carrier.png --file notes.pdf -o encoded.png
+python -m simp codec encode examples/sample.png "Meet at the north trailhead." -o encoded.png
+python -m simp codec decode encoded.png
 ```
 
-Recover readable text in the terminal:
+Hide and recover a file:
 
 ```bash
-python steg.py decode encoded.png
-```
-
-Recover any payload to a file:
-
-```bash
-python steg.py decode encoded.png -o recovered.bin
+python -m simp codec encode carrier.png --file notes.pdf -o encoded.png
+python -m simp codec decode encoded.png -o recovered.bin
 ```
 
 ## How it works
 
 ```mermaid
 flowchart LR
-    A[8-bit PNG carrier] --> B[Decode pixel bytes]
-    P[Text or file] --> C[Add STEG marker<br/>and payload length]
-    B --> D[Replace one least-significant bit<br/>per channel byte]
-    C --> D
-    D --> E[Write a new lossless PNG]
-    E --> F[Recover bytes later<br/>without executing them]
+    A[8-bit PNG carrier] --> C[PNG decoder]
+    B[Text or file bytes] --> D[STEG header + length]
+    C --> E[Replace one least-significant bit per channel byte]
+    D --> E
+    E --> F[New lossless PNG]
+    F --> G[Recover inert bytes later]
 ```
 
-Every payload is prefixed with the four-byte marker `STEG` and a four-byte big-endian payload length. The resulting bitstream is written one bit at a time into the lowest bit of each available channel byte.
+The base codec prefixes each payload with a four-byte `STEG` marker and a
+four-byte big-endian length. Messenger payloads add a `SIMP/1` envelope
+containing the protocol version, event kind, UUID, sender, room, timestamps,
+and message text. New envelopes expire after 24 hours. TCP adds only a
+four-byte frame length around each PNG.
 
-Approximate payload capacity:
+Approximate capacity is:
 
 ```text
-(width × height × channels ÷ 8) − 8 bytes
+(width x height x channels / 8) - 8 bytes
 ```
 
-For example, a 1920 × 1080 RGB image can hold roughly **759 KiB**. Alpha channels also contribute capacity when present.
+Supported inputs are 8-bit grayscale, RGB, grayscale-alpha, and RGBA PNGs.
+Paletted and 16-bit PNGs are not supported. JPEG conversion, resizing,
+optimization, or pixel editing can destroy embedded data.
 
-## PNG support
+The PNG reader validates chunk boundaries and CRCs, rejects unknown scanline
+filters, and caps input at 64 MB and decoded pixel data at 48 MB.
 
-| PNG format | Supported |
-| --- | :---: |
-| 8-bit grayscale | Yes |
-| 8-bit RGB | Yes |
-| 8-bit grayscale + alpha | Yes |
-| 8-bit RGBA | Yes |
-| Paletted/indexed color | No |
-| 16-bit channels | No |
-
-Lattice always writes a lossless PNG. Converting the encoded file to JPEG, resizing it, optimizing its pixels, or editing and re-saving it can destroy the hidden payload.
-
-## Project map
+## Project structure
 
 ```text
 .
-├── app.py                  # Tkinter desktop interface
-├── steg.py                 # PNG codec, LSB engine, and CLI
-├── lattice.bat             # Double-click launcher for Windows
-├── assets/plates/          # Built-in carrier and preview images
-├── assets/fonts/           # Bundled Libre Caslon Text font and OFL license
-├── docs/assets/            # README artwork and product screenshot
-├── sample.png              # Small carrier fixture
-└── hidden.png              # Small encoded fixture
+|-- simp/                       Python package
+|   |-- app.py                  Primary messenger entry point
+|   |-- chat.py                 Image messenger UI
+|   |-- workbench.py            Optional Hide/Recover utility
+|   |-- steg.py                 PNG codec, LSB engine, and codec CLI
+|   |-- wire_protocol.py        Versioned message envelope
+|   |-- wire_client.py          Reusable connected client
+|   |-- transport.py            Length-framed PNG transport
+|   |-- relay.py                Multi-room relay server
+|   `-- assets/                 Fonts and bundled carrier images
+|-- tests/                      Unit and integration tests
+|-- examples/                   Sample and encoded PNG fixtures
+|-- docs/                       Product, design, and server setup
+|-- deploy/                     Hardened systemd relay service
+|-- archive/legacy-prototype/   Inactive historical material
+|-- pyproject.toml              Package metadata and console scripts
+|-- simp.bat                    Windows messenger launcher
+`-- simp-messenger.bat          Windows messenger launcher
 ```
 
-## Design boundaries
+The archived prototype is not part of the package and is never imported by the
+supported application. Its former script and launcher files have an added
+`.txt` suffix so they cannot be launched accidentally.
 
-Lattice is intentionally small and transparent:
+## Development
 
-- no uploads, network calls, telemetry, or third-party Python packages;
-- no encryption, compression, password protection, or integrity authentication;
-- no execution, opening, or automatic dispatch of recovered payloads;
-- no resilience against lossy conversion or pixel-level image modification.
+Run the test suite from the repository root:
 
-Use it for learning, local experiments, watermark-like metadata, and other lawful workflows where both sides know how to recover the payload.
+```bash
+python -m unittest discover -s tests -v
+```
 
----
+The tests cover byte-level steganography, malformed-PNG rejection, envelope
+validation, legacy compatibility, socket framing, room isolation, relay control
+frame rejection, and byte-identical delivery across two- and three-client rooms.
 
-<div align="center">
-  <sub>One image on the surface. A few more bits underneath.</sub>
-</div>
+For editable command-line entry points, install the project locally:
+
+```bash
+python -m pip install -e .
+simp --help
+```
+
+## Security boundaries
+
+- Recovered data is returned or saved; it is never opened or executed.
+- The local workbench makes no network calls.
+- The messenger contacts only the relay address entered by the user.
+- The relay limits participants, room size, message rate, handshake time, and
+  idle connection time; clients cannot send relay-only control frames or
+  expired envelopes.
+- SIMP provides concealment, not confidentiality, authenticity, or integrity.
+- Treat decoded files with the same caution as any untrusted downloaded file.
