@@ -13,6 +13,8 @@ event travels inside a steganographic PNG.
 
 <img src="docs/assets/simp-hero.png" alt="SIMP steganography artwork" width="100%">
 
+
+
 </div>
 
 SIMP hides text or file data in the least-significant bits of an 8-bit PNG.
