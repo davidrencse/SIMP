@@ -183,3 +183,4 @@ simp --help
   expired envelopes.
 - SIMP provides concealment, not confidentiality, authenticity, or integrity.
 - Treat decoded files with the same caution as any untrusted downloaded file.
+"# SIMP" 
