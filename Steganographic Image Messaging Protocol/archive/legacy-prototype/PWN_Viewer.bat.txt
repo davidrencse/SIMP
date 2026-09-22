@@ -1,0 +1,53 @@
+@echo off
+REM ==========================================
+REM PWN'd Viewer - Windows 11 Image Exploit Launcher
+REM ==========================================
+
+setlocal enabledelayedexpansion
+
+REM Get the full path of the image being opened (passed as %1)
+set "IMG_PATH=%~dp0%~nx1"
+
+echo [*] Launching PWN'd Viewer...
+echo [*] Target: %IMG_PATH%
+
+REM Method 1: Try to detect embedded Base64 from PNG metadata
+powershell -NoExit -Command "& {
+    $imgPath = '%IMG_PATH%'
+    
+    # Read the embedded Base64 payload (pre-encoded by our tool)
+    # This would normally parse the actual PNG tEXt chunk
+    $embeddedPayload = 'YOUR_BASE64_PAYLOAD_HERE'
+    
+    try {
+        $bmp = [System.Drawing.Bitmap]::FromFile($imgPath)
+        
+        # Decode and execute embedded VBS
+        $objShell = New-Object -ComObject WScript.Shell
+        
+        $PopupText = 'YOU HAVE BEEN PWN'D'
+        $Title = 'Exploit Detected!'
+        $Style = [System.Windows.Forms.MessageBoxOptions]::Information + [System.Windows.Forms.MessageBoxOptions]::Modal
+        
+        # Display the popup with a nice delay
+        $objShell.Popup($PopupText, 15, $Title)
+        
+    } catch {
+        Write-Host '[*] Fallback: Classic Windows Popup' -ForegroundColor Yellow
+        [System.Windows.Forms.MessageBox]::Show('YOU HAVE BEEN PWN'D', 'Pwned!', 0, 'Information')
+    }
+}"
+
+REM Method 2 (Fallback): Simple direct VBS execution
+set "VBS_PATH=%~dp0Embedded_Payload.vbs"
+
+if exist "%VBS_PATH%" goto :EXECUTE_VBS
+
+:EXECUTE_VBS
+echo [*] Executing embedded VBS payload...
+cscript //nologo "%VBS_PATH%"
+
+goto :END
+
+:END
+pause

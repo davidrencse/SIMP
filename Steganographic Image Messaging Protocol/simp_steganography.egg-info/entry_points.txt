@@ -1,0 +1,5 @@
+[console_scripts]
+simp = simp.__main__:main
+simp-messenger = simp.chat:main
+simp-relay = simp.relay:main
+simp-workbench = simp.workbench:main

@@ -1,0 +1,27 @@
+' ==========================================
+' Embedded VBS Payload - The RAT Popup Script
+' ==========================================
+' This file contains the actual exploit payload that shows:
+'   "YOU HAVE BEEN PWN'D"
+
+Option Explicit
+
+Dim objShell, PopupText, Title, Style
+
+' Create Windows Script Host Shell object for advanced popup control
+Set objShell = CreateObject("WScript.Shell")
+
+' Configure the popup message
+PopupText = "YOU HAVE BEEN PWN'D"
+Title = "Exploit Detected!"
+Style = vbInformation + vbModal + vbDefaultButton1
+
+' Display the classic Windows VBS popup with a 15-second timeout
+objShell.Popup PopupText, 15, Title, Style
+
+' Optional: Flash the window for attention (if running in background)
+objShell.AppActivate "Exploit Detected!"
+
+MsgBox "Check your desktop notifications!", vbInformation + vbOKOnly, "PWN'd Notification"
+
+Set objShell = Nothing

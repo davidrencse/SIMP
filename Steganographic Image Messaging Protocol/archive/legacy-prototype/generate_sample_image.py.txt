@@ -1,0 +1,41 @@
+#!/usr/bin/env python3
+"""Generate a clean 1080x720 sample image for testing the exploit encoder."""
+
+from PIL import Image, ImageDraw, ImageFont
+import os
+
+def generate_sample(path: str):
+    # Create a nice gradient background
+    img = Image.new('RGB', (1920, 1080), color='#1a1a2e')
+    
+    draw = ImageDraw.Draw(img)
+    
+    # Add some geometric shapes for visual appeal
+    colors = ['#e94560', '#0f3460', '#16213e']
+    
+    # Draw circles
+    for i, color in enumerate(colors):
+        cx = 50 + (i * 30)
+        cy = 500
+        radius = 80 - i * 20
+        draw.ellipse([cx-radius-10, cy-radius-10, cx+radius+10, cy+radius+10], fill=color)
+    
+    # Draw some lines
+    for i in range(5):
+        y = 100 + (i * 180)
+        draw.line([(50, y), (1920, y)], width=3, fill='#ffffff', opacity=(100-i*20))
+    
+    # Add text watermark
+    try:
+        font = ImageFont.truetype("C:/Windows/Fonts/arial.ttf", 72)
+    except:
+        font = ImageFont.load_default()
+    
+    draw.text((800, 900), "Sample Image", fill='#ffffff', font=font)
+    
+    img.save(path)
+    print(f"Generated sample image: {path}")
+
+if __name__ == '__main__':
+    output = 'sample_input.png'
+    generate_sample(output)

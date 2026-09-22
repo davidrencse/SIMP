@@ -1,0 +1,1 @@
+i want to create a tool which can encode an image with an exploit script RAT so anyone who downloads the image also downloads the RAT.
