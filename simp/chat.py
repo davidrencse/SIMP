@@ -13,6 +13,7 @@ import threading
 import tkinter as tk
 from tkinter import filedialog, messagebox
 
+from .location import LocationError, approximate_location
 from .relay import RelayServer
 from .steg import StegError, read_png_bytes
 from .wire_client import WireClient
@@ -63,6 +64,14 @@ def local_time(iso_time: str) -> str:
         return "--:--"
 
 
+def local_timestamp(iso_time: str) -> str:
+    try:
+        parsed = datetime.fromisoformat(iso_time.replace("Z", "+00:00"))
+        return parsed.astimezone().strftime("%b %d, %Y  %I:%M %p")
+    except ValueError:
+        return "Time unavailable"
+
+
 def local_expiry(iso_time: str) -> str:
     try:
         parsed = datetime.fromisoformat(iso_time.replace("Z", "+00:00"))
@@ -92,6 +101,9 @@ class WireApp:
         self.message_records: list[tuple[tk.Widget, tk.PhotoImage | None]] = []
         self._sending = False
         self._connect_generation = 0
+        self.location = ""
+        self._location_generation = 0
+        self._location_loading = False
 
         root.title("SIMP - Steganographic Image Messaging Protocol")
         root.geometry("1280x820+60+40")
@@ -290,8 +302,10 @@ class WireApp:
 
         composer = tk.Frame(self.main, bg=PAPER, padx=26, pady=20)
         composer.pack(fill="x", side="bottom")
-        input_rule = tk.Frame(composer, bg=INK, padx=1, pady=1)
-        input_rule.pack(side="left", fill="both", expand=True, padx=(0, 14))
+        input_column = tk.Frame(composer, bg=PAPER)
+        input_column.pack(side="left", fill="both", expand=True, padx=(0, 14))
+        input_rule = tk.Frame(input_column, bg=INK, padx=1, pady=1)
+        input_rule.pack(fill="both", expand=True)
         self.message_input = tk.Text(
             input_rule,
             width=1,
@@ -311,6 +325,33 @@ class WireApp:
         )
         self.message_input.pack(fill="both", expand=True)
         self.message_input.bind("<<Modified>>", self._message_changed)
+        location_row = tk.Frame(input_column, bg=PAPER)
+        location_row.pack(fill="x", pady=(9, 0))
+        self.include_location_var = tk.BooleanVar(value=False)
+        tk.Checkbutton(
+            location_row,
+            text="Include approximate location",
+            variable=self.include_location_var,
+            command=self._toggle_location,
+            bg=PAPER,
+            fg=INK,
+            activebackground=PAPER,
+            activeforeground=INK,
+            selectcolor=WHITE,
+            highlightcolor=INK,
+            font=("Segoe UI", 9),
+        ).pack(anchor="w")
+        self.location_var = tk.StringVar(value="Off · ipapi.co sees your public IP when enabled")
+        tk.Label(
+            location_row,
+            textvariable=self.location_var,
+            bg=PAPER,
+            fg=DIM,
+            anchor="w",
+            justify="left",
+            wraplength=340,
+            font=("Segoe UI", 9),
+        ).pack(fill="x", padx=(22, 0))
         action = tk.Frame(composer, bg=PAPER, width=150)
         action.pack(side="right", fill="y")
         action.pack_propagate(False)
@@ -520,10 +561,14 @@ class WireApp:
         if not self.client or not self.client.connected:
             self._status("Connect to a room before sending.", error=True)
             return "break"
+        if self.include_location_var.get() and not self.location:
+            self._status("Wait for the location lookup, or turn it off to send.", error=True)
+            return "break"
+        location = self.location if self.include_location_var.get() else ""
         try:
             payload_size = len(
                 new_envelope(
-                    "message", self.client.name, self.client.room, text
+                    "message", self.client.name, self.client.room, text, location=location
                 ).to_payload()
             )
         except ProtocolError as exc:
@@ -541,7 +586,7 @@ class WireApp:
 
         def work() -> None:
             try:
-                image, envelope = client.send_message(text)
+                image, envelope = client.send_message(text, location=location)
             except (OSError, ConnectionError, ProtocolError) as exc:
                 self.events.put(("send_error", str(exc)))
             else:
@@ -549,6 +594,29 @@ class WireApp:
 
         threading.Thread(target=work, name="simp-send", daemon=True).start()
         return "break"
+
+    def _toggle_location(self) -> None:
+        self._location_generation += 1
+        generation = self._location_generation
+        self.location = ""
+        if not self.include_location_var.get():
+            self._location_loading = False
+            self.location_var.set("Off · ipapi.co sees your public IP when enabled")
+            self._update_count()
+            return
+        self._location_loading = True
+        self.location_var.set("Finding your approximate area…")
+        self._update_count()
+
+        def work() -> None:
+            try:
+                place = approximate_location()
+            except LocationError as exc:
+                self.events.put(("location_error", generation, str(exc)))
+            else:
+                self.events.put(("location_ready", generation, place))
+
+        threading.Thread(target=work, name="simp-location", daemon=True).start()
 
     def _incoming_image(self, image: bytes, envelope: Envelope) -> None:
         self.events.put(("image", image, envelope))
@@ -597,6 +665,21 @@ class WireApp:
                     self.send_button.configure(text="Send as image")
                     self._update_count()
                     self._status(f"Message was not sent: {message}", error=True)
+                elif kind == "location_ready":
+                    _, generation, place = event
+                    if generation == self._location_generation and self.include_location_var.get():
+                        self.location = place
+                        self._location_loading = False
+                        self.location_var.set(f"Approx. {place}")
+                        self._update_count()
+                elif kind == "location_error":
+                    _, generation, message = event
+                    if generation == self._location_generation and self.include_location_var.get():
+                        self.include_location_var.set(False)
+                        self._location_loading = False
+                        self.location_var.set("Off · lookup failed; enable to retry")
+                        self._update_count()
+                        self._status(message, error=True)
                 elif kind == "disconnected":
                     _, reason = event
                     self.client = None
@@ -662,14 +745,24 @@ class WireApp:
             ).pack(side="right" if mine else "left")
             tk.Label(
                 meta,
-                text=(
-                    f"{local_time(envelope.sent_at)} · "
-                    f"expires {local_expiry(envelope.expires_at)}"
-                ),
+                text=local_timestamp(envelope.sent_at),
                 bg=WHITE,
                 fg=MUTED_LIGHT,
                 font=("Consolas", 8),
             ).pack(side="right" if not mine else "left")
+            details = f"Expires {local_expiry(envelope.expires_at)}"
+            if envelope.location:
+                details = f"Approx. {envelope.location}  ·  {details}"
+            tk.Label(
+                message,
+                text=details,
+                bg=WHITE,
+                fg=DIM,
+                anchor="e" if mine else "w",
+                justify="right" if mine else "left",
+                wraplength=420,
+                font=("Segoe UI", 9),
+            ).pack(fill="x", pady=(0, 7))
             artifact = tk.Frame(message, bg=WHITE)
             artifact.pack(fill="x")
             image_column = tk.Frame(artifact, bg=INK, width=224, height=148)
@@ -813,6 +906,7 @@ class WireApp:
                     self.name_var.get().strip() or "User",
                     self.room_var.get().strip() or "room",
                     text,
+                    location=self.location if self.include_location_var.get() else "",
                 )
                 payload_size = len(envelope.to_payload())
                 fits = payload_size <= self.capacity
@@ -827,7 +921,9 @@ class WireApp:
             self.count_var.set(f"0 B text / {readable_size(self.capacity)} message capacity")
         connected = bool(self.client and self.client.connected)
         self.send_button.configure(
-            state="normal" if connected and fits and not self._sending else "disabled"
+            state="normal"
+            if connected and fits and not self._sending and not self._location_loading
+            else "disabled"
         )
 
     def _sync_scroll_region(self, _event=None) -> None:

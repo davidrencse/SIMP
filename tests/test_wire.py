@@ -2,18 +2,25 @@ from __future__ import annotations
 
 from datetime import datetime, timedelta, timezone
 import json
+from io import BytesIO
+import os
 import socket
 from pathlib import Path
 import struct
+import subprocess
+import sys
+import tempfile
 import threading
 import time
 import unittest
+from unittest.mock import patch
 import zlib
 
 ROOT = Path(__file__).resolve().parents[1]
 
 from simp.relay import RelayServer
 from simp.chat import decode_message_text
+from simp.location import LocationError, approximate_location
 from simp.steg import MAX_DIMENSION, SIGNATURE, StegError, embed_bytes, extract_bytes, read_png_bytes
 from simp.transport import TransportError, receive_image, send_image
 from simp.wire_client import WireClient
@@ -82,12 +89,43 @@ class StegMemoryTests(unittest.TestCase):
         with self.assertRaisesRegex(StegError, "maximum"):
             read_png_bytes(malformed)
 
+    def test_codec_cli_decodes_unicode_with_legacy_stdout_encoding(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            image = Path(directory) / "unicode.png"
+            image.write_bytes(embed_bytes(CARRIER, "caf\u00e9".encode("utf-8")))
+            result = subprocess.run(
+                [sys.executable, "-m", "simp", "codec", "decode", str(image)],
+                cwd=ROOT,
+                env={**os.environ, "PYTHONIOENCODING": "cp1252"},
+                capture_output=True,
+                check=False,
+            )
+        self.assertEqual(result.returncode, 0, result.stderr.decode(errors="replace"))
+        self.assertEqual(result.stdout, "caf\u00e9\n".encode("utf-8"))
+
 
 class ProtocolTests(unittest.TestCase):
     def test_envelope_round_trip_through_image(self) -> None:
         original = new_envelope("message", "Alice", "first-room", "Hello, Bob.")
         image = encode_image(CARRIER, original)
         self.assertEqual(decode_image(image), original)
+
+    def test_location_round_trip_through_image(self) -> None:
+        original = new_envelope(
+            "message", "Alice", "first-room", "Hello, Bob.",
+            location="Springfield, Illinois, United States",
+        )
+        image = encode_image(CARRIER, original)
+        self.assertEqual(decode_image(image).location, original.location)
+        self.assertTrue(original.sent_at.endswith("Z"))
+
+    def test_rejects_invalid_location(self) -> None:
+        with self.assertRaisesRegex(ProtocolError, "location exceeds"):
+            new_envelope("message", "Alice", "first-room", "Hello", location="x" * 161)
+        with self.assertRaisesRegex(ProtocolError, "control characters"):
+            new_envelope("message", "Alice", "first-room", "Hello", location="A\nB")
+        with self.assertRaisesRegex(ProtocolError, "only messages"):
+            new_envelope("join", "Alice", "first-room", location="Springfield")
 
     def test_rejects_plain_steg_payload(self) -> None:
         image = embed_bytes(CARRIER, b"not a wire envelope")
@@ -126,6 +164,26 @@ class ProtocolTests(unittest.TestCase):
         image = encode_image(CARRIER, join)
         with self.assertRaisesRegex(ProtocolError, "does not contain a text message"):
             decode_message_text(image)
+
+
+class LocationTests(unittest.TestCase):
+    def test_looks_up_approximate_area_without_coordinates(self) -> None:
+        response = BytesIO(json.dumps({
+            "city": "Springfield",
+            "region": "Illinois",
+            "country_name": "United States",
+            "ip": "203.0.113.10",
+            "latitude": 39.8,
+        }).encode("utf-8"))
+        with patch("simp.location.urlopen", return_value=response) as lookup:
+            place = approximate_location()
+        self.assertEqual(place, "Springfield, Illinois, United States")
+        self.assertEqual(lookup.call_args.args[0].full_url, "https://ipapi.co/json/")
+
+    def test_rejects_location_service_failure(self) -> None:
+        with patch("simp.location.urlopen", return_value=BytesIO(b'{"error": true}')):
+            with self.assertRaisesRegex(LocationError, "could not determine"):
+                approximate_location()
 
 
 class TransportTests(unittest.TestCase):
@@ -183,7 +241,9 @@ class RelayIntegrationTests(unittest.TestCase):
             "clients did not receive image-carried join events",
         )
 
-        sent_image, sent_envelope = self.a.send_message("The decoded text is readable.")
+        sent_image, sent_envelope = self.a.send_message(
+            "The decoded text is readable.", location="Springfield, Illinois"
+        )
         self.assertTrue(
             wait_for(
                 lambda: any(
@@ -201,6 +261,7 @@ class RelayIntegrationTests(unittest.TestCase):
         self.assertEqual(received_image, sent_image)
         self.assertTrue(received_image.startswith(SIGNATURE))
         self.assertEqual(decode_image(received_image).text, "The decoded text is readable.")
+        self.assertEqual(decode_image(received_image).location, "Springfield, Illinois")
 
     def test_room_isolation(self) -> None:
         self.a.connect("127.0.0.1", self.server.bound_port, "Alice", "room-a", CARRIER)

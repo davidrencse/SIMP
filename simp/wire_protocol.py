@@ -15,6 +15,7 @@ PROTOCOL_VERSION = 1
 PAYLOAD_PREFIX = b"SIMP/1\0"
 LEGACY_PAYLOAD_PREFIXES = (b"LATTICE-WIRE/1\0",)
 MAX_TEXT_BYTES = 16 * 1024
+MAX_LOCATION_BYTES = 160
 MAX_ID_LENGTH = 32
 DEFAULT_TTL_SECONDS = 24 * 60 * 60
 MAX_TTL_SECONDS = 7 * 24 * 60 * 60
@@ -36,6 +37,7 @@ class Envelope:
     sent_at: str
     text: str
     expires_at: str
+    location: str = ""
 
     def validate(self) -> "Envelope":
         if self.version != PROTOCOL_VERSION:
@@ -79,6 +81,14 @@ class Envelope:
             raise ProtocolError(f"message text exceeds {MAX_TEXT_BYTES} UTF-8 bytes")
         if self.kind in {"message", "ack", "error"} and not self.text.strip():
             raise ProtocolError(f"{self.kind} text cannot be empty")
+        if not isinstance(self.location, str):
+            raise ProtocolError("location must be a string")
+        if len(self.location.encode("utf-8")) > MAX_LOCATION_BYTES:
+            raise ProtocolError(f"location exceeds {MAX_LOCATION_BYTES} UTF-8 bytes")
+        if any(ord(char) < 32 or ord(char) == 127 for char in self.location):
+            raise ProtocolError("location cannot contain control characters")
+        if self.kind != "message" and self.location:
+            raise ProtocolError("only messages can include a location")
         return self
 
     def is_expired(self, now: datetime | None = None) -> bool:
@@ -89,8 +99,11 @@ class Envelope:
 
     def to_payload(self) -> bytes:
         self.validate()
+        fields = asdict(self)
+        if not self.location:
+            fields.pop("location")
         body = json.dumps(
-            asdict(self), ensure_ascii=False, separators=(",", ":"), sort_keys=True
+            fields, ensure_ascii=False, separators=(",", ":"), sort_keys=True
         ).encode("utf-8")
         return PAYLOAD_PREFIX + body
 
@@ -123,7 +136,7 @@ class Envelope:
                 )
             except (KeyError, TypeError, ValueError, AttributeError):
                 raw["expires_at"] = raw.get("sent_at", "")
-        elif set(raw) != expected:
+        elif set(raw) not in (expected, expected | {"location"}):
             raise ProtocolError("message envelope has missing or unknown fields")
         try:
             envelope = cls(**raw)
@@ -139,6 +152,7 @@ def new_envelope(
     text: str = "",
     *,
     ttl_seconds: int = DEFAULT_TTL_SECONDS,
+    location: str = "",
 ) -> Envelope:
     """Create and validate a new protocol envelope."""
     if not isinstance(ttl_seconds, int) or not 1 <= ttl_seconds <= MAX_TTL_SECONDS:
@@ -154,6 +168,7 @@ def new_envelope(
         sent_at=sent.isoformat(timespec="seconds").replace("+00:00", "Z"),
         text=text,
         expires_at=expires.isoformat(timespec="seconds").replace("+00:00", "Z"),
+        location=location.strip() if isinstance(location, str) else location,
     )
     return envelope.validate()
 

@@ -81,10 +81,10 @@ class WireClient:
         self._receiver.start()
         return join_image, join
 
-    def send_message(self, text: str) -> tuple[bytes, Envelope]:
+    def send_message(self, text: str, *, location: str = "") -> tuple[bytes, Envelope]:
         if not self.connected:
             raise ConnectionError("connect before sending a message")
-        envelope = new_envelope("message", self.name, self.room, text)
+        envelope = new_envelope("message", self.name, self.room, text, location=location)
         image = encode_image(self.carrier_png, envelope)
         self._send_encoded(image)
         return image, envelope

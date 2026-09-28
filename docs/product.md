@@ -26,7 +26,7 @@ The Hide/Recover workbench remains an explicitly named secondary utility for dir
 
 SIMP is a dependency-free learning and experimentation tool for deliberate image-carried communication. It is transparent about its boundary: steganography conceals bytes but does not encrypt, authenticate, or protect their integrity. The relay decodes envelopes to validate and route them, so it is not a zero-knowledge intermediary.
 
-The product never executes recovered content. The local workbench makes no network calls; the messenger contacts only the relay address the user enters.
+The product never executes recovered content. The local workbench makes no network calls; the messenger contacts the relay address the user enters and, only when the user enables approximate location, the ipapi.co lookup service.
 
 ## Operating Context
 
@@ -43,6 +43,7 @@ The secondary workbench runs independently. It lets a user choose a local carrie
 - The relay validates and routes images by room, rejects duplicate display names and client-forged control frames, and supports multiple concurrent participants.
 - Sender and room identifiers are 1-32 characters and may contain letters, numbers, spaces, dots, dashes, and underscores.
 - Message text is UTF-8 and limited to 16 KiB before envelope overhead. The selected carrier must have enough steganographic capacity for the complete envelope.
+- Messages show their full local send date and time. An optional city/region/country label can be obtained by an explicit public-IP lookup and embedded in the message PNG; the IP address and coordinates are not embedded.
 - New envelopes expire after 24 hours, lifetimes cannot exceed seven days, and the relay refuses expired images.
 - Transport frames are limited to 32 MiB and must begin with a PNG signature.
 - Conversation history exists only in the running client and is capped at 100 rendered records; there is no server persistence.

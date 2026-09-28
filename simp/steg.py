@@ -390,7 +390,9 @@ def _cmd_decode(args):
         except UnicodeDecodeError:
             print(payload, file=sys.stdout)
         else:
-            print(text)
+            # Windows pipes may use a legacy code page even when the payload is
+            # valid UTF-8. Write UTF-8 bytes so decoded text survives redirects.
+            sys.stdout.buffer.write((text + "\n").encode("utf-8"))
 
 
 if __name__ == "__main__":
