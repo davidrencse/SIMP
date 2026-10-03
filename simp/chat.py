@@ -124,6 +124,7 @@ class WireApp:
         self.sidebar.pack_propagate(False)
         self.main = tk.Frame(self.root, bg=WHITE)
         self.main.pack(side="left", fill="both", expand=True)
+        self.main.bind("<Configure>", self._adapt_conversation_header)
 
         brand = tk.Frame(self.sidebar, bg=BLACK)
         brand.pack(fill="x", padx=28, pady=(20, 20))
@@ -245,13 +246,14 @@ class WireApp:
             highlightcolor=INK,
         )
         self.room_status.pack(fill="x", pady=(3, 0))
-        tk.Label(
+        self.protocol_hint = tk.Label(
             top,
             text="PNG FIRST / TEXT ON REQUEST",
             bg=WHITE,
             fg=DIM,
             font=("Consolas", 9),
-        ).pack(side="right", padx=36)
+        )
+        self.protocol_hint.pack(side="right", padx=36)
         tk.Frame(self.main, height=1, bg=LIGHT).pack(fill="x")
 
         self.conversation_canvas = tk.Canvas(
@@ -278,19 +280,23 @@ class WireApp:
 
         self.empty_state = tk.Frame(self.message_list, bg=WHITE)
         self.empty_state.pack(fill="both", expand=True, padx=58, pady=100)
-        tk.Label(
+        self.empty_title = tk.Label(
             self.empty_state,
             text="The image is the message.",
             bg=WHITE,
             fg=INK,
             font=(DISPLAY_FACE, 28),
             anchor="w",
-        ).pack(fill="x")
-        tk.Label(
+            justify="left",
+            wraplength=440,
+        )
+        self.empty_title.pack(fill="x")
+        self.empty_description = tk.Label(
             self.empty_state,
             text=(
-                "Connect two clients to the same room. Each message arrives as a picture. "
-                "Choose Reveal beside an image to show its text."
+                "Enter your name and connect to a relay. Exploring on one computer? "
+                "Start the local relay first, then connect a second window to the same room. "
+                "Messages arrive as PNGs; select Reveal to read one."
             ),
             bg=WHITE,
             fg=DIM,
@@ -298,7 +304,8 @@ class WireApp:
             justify="left",
             wraplength=420,
             anchor="w",
-        ).pack(fill="x", pady=(12, 0))
+        )
+        self.empty_description.pack(fill="x", pady=(12, 0))
 
         composer = tk.Frame(self.main, bg=PAPER, padx=26, pady=20)
         composer.pack(fill="x", side="bottom")
@@ -447,6 +454,21 @@ class WireApp:
         self.root.bind("<Control-o>", lambda _event: self.choose_carrier())
         self.root.bind("<Control-k>", lambda _event: self.toggle_connection())
         self.root.bind("<Alt-s>", lambda _event: self.room_status.focus_set())
+
+    def _adapt_conversation_header(self, event=None) -> None:
+        """Keep the title and protocol note legible as the window is resized."""
+        width = event.width if event is not None else self.main.winfo_width()
+        if width <= 0:
+            return
+        if width < 700:
+            if self.protocol_hint.winfo_manager():
+                self.protocol_hint.pack_forget()
+        elif not self.protocol_hint.winfo_manager():
+            self.protocol_hint.pack(side="right", padx=36)
+        if hasattr(self, "empty_title"):
+            measure = max(220, min(440, width - 150))
+            self.empty_title.configure(wraplength=measure)
+            self.empty_description.configure(wraplength=max(220, min(420, width - 150)))
 
     def choose_carrier(self) -> None:
         path = filedialog.askopenfilename(

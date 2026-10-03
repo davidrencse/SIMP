@@ -69,6 +69,7 @@ class SIMPApp:
         self.root = root
         self.mode = "hide"
         self.payload_kind = "text"
+        self.payload_text_value = ""
         self.carrier_path: Path | None = None
         self.payload_path: Path | None = None
         self.output_path: Path | None = None
@@ -290,6 +291,8 @@ class SIMPApp:
             )
 
     def _render_bench(self) -> None:
+        if hasattr(self, "payload_text") and self.payload_text.winfo_exists():
+            self.payload_text_value = self.payload_text.get("1.0", "end-1c")
         for child in self.bench.winfo_children():
             child.destroy()
         if self.mode == "hide":
@@ -499,6 +502,8 @@ class SIMPApp:
         self.status_label.pack(fill="both", expand=True, pady=(13, 0))
 
     def _render_payload_body(self) -> None:
+        if hasattr(self, "payload_text") and self.payload_text.winfo_exists():
+            self.payload_text_value = self.payload_text.get("1.0", "end-1c")
         for child in self.payload_body.winfo_children():
             child.destroy()
         if self.payload_kind == "text":
@@ -516,6 +521,8 @@ class SIMPApp:
                 font=("Segoe UI", 9),
             )
             self.payload_text.pack(fill="both", expand=True)
+            if self.payload_text_value:
+                self.payload_text.insert("1.0", self.payload_text_value)
             self.payload_text.bind("<<Modified>>", self._text_modified)
         else:
             self._flat_button(
@@ -584,9 +591,6 @@ class SIMPApp:
         if compact == self.compact:
             return
 
-        saved_text = ""
-        if hasattr(self, "payload_text") and self.payload_text.winfo_exists():
-            saved_text = self.payload_text.get("1.0", "end-1c")
         saved_status = self.status_var.get() if hasattr(self, "status_var") else ""
         saved_recovered = ""
         if hasattr(self, "recovered_preview") and self.recovered_preview.winfo_exists():
@@ -628,8 +632,6 @@ class SIMPApp:
 
         self._configure_bench_grid()
         self._render_bench()
-        if saved_text and self.mode == "hide" and self.payload_kind == "text":
-            self.payload_text.insert("1.0", saved_text)
         if self.output_path:
             self.output_var.set(self.output_path.name)
         if saved_status:
@@ -765,6 +767,7 @@ class SIMPApp:
     def _text_modified(self, _event=None) -> None:
         if hasattr(self, "payload_text") and self.payload_text.edit_modified():
             self.payload_text.edit_modified(False)
+            self.payload_text_value = self.payload_text.get("1.0", "end-1c")
             self._update_capacity()
 
     def _current_payload(self) -> bytes:
